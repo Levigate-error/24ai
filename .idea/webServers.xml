@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="914ba27f-0012-4c21-a212-9330689444f4" name="landing">
+        <fileTransfer rootFolder="/app" accessType="SFTP" host="77.105.159.127" port="22" sshConfigId="5ef6fba0-cc0c-4e4b-9a60-54d79a10d925" sshConfig="wpuser@77.105.159.127:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

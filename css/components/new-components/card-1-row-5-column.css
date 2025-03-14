@@ -1,0 +1,101 @@
+/* Card 1 row 5 column @3373 */
+
+.card-1-row-5-column_slide-text {
+font-size: 18px;
+font-style: normal;
+font-weight: 500;
+line-height: 24px; /* 133.333% */
+}
+
+.card-1-row-5-column_slide {
+    padding: 22px 32px;
+    align-self: stretch;
+    height: auto;
+}
+
+.card-1-row-5-column_slider-pagination {
+    position: relative;
+    margin: 45px auto 0;
+}
+
+.card-1-row-5-column_slider-pagination .swiper-pagination-bullet {
+    background-color: transparent;
+    border: 1px solid #fff;
+    opacity: 1;
+    margin: 0 10px !important;
+    width: 10px;
+    height: 10px;
+}
+
+.card-1-row-5-column_slider-pagination .swiper-pagination-bullet-active {
+    background-color: #fff;
+    border: 1px solid transparent;
+}
+
+.card-1-row-5-column_cta {
+    display: flex;
+    padding: 35px;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    border-radius: 15px;
+    margin: 60px auto 0 auto;
+    height: 120px;
+    width: 577px;
+}
+
+.card-1-row-5-column_cta-profile {
+    display: flex;
+    gap: 15px;
+}
+.card-1-row-5-column_avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+}
+
+.card-1-row-5-column_cta-button{
+    display: flex;
+    width: 251px;
+    height: 50px;
+    padding: 24px 27px 22px 27px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 7px;
+}
+
+.card-1-row-5-column_card-name{
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.card-1-row-5-column_card-job {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+@media screen and (max-width: 768px){
+    .card-1-row-5-column_slider-pagination{
+        transform: translateX(0)!important;
+        left: 0!important;
+    }
+    .card-1-row-5-column_cta {
+        flex-direction: column;
+        padding: 32px;
+        gap: 15px;
+        height: auto;
+        width: auto;
+        align-items: flex-start;
+    }
+    .card-1-row-5-column_cta a{
+        width: -webkit-fill-available;
+    }
+    .card-1-row-5-column_cta-button {
+        width: auto;
+    }
+}

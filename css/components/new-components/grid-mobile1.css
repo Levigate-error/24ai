@@ -1,0 +1,63 @@
+/* Grid slider with 1 row in mobile */
+
+.grid-mobile1-content__slide {
+    display: flex;
+    padding: 22px 32px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 35px;
+    align-self: stretch;
+    height: auto!important;
+}
+
+.grid-mobile1-content__slide-header-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    align-self: stretch;
+}
+
+.grid-mobile1-content__slide-title {
+    display: flex;
+    height: 87px;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-self: stretch;    
+    font-size: 29px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 29px; /* 100% */
+}
+
+.grid-mobile1-content__slide-desc {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 133.333% */
+}
+
+.grid-mobile1-content__slider-pagination {
+    position: relative;
+    margin: 45px auto 0;
+}
+
+.grid-mobile1-content__slider-pagination .swiper-pagination-bullet {
+    background-color: transparent;
+    border: 1px solid #000;
+    opacity: 1;
+    margin: 0 10px !important;
+    width: 10px;
+    height: 10px;
+}
+
+.grid-mobile1-content__slider-pagination .swiper-pagination-bullet-active {
+    background-color: #000;
+    border: 1px solid transparent;
+}
+@media screen and (max-width: 1200px){
+    .grid-mobile1-content__slider-pagination{
+        transform: translateX(0)!important;
+        left: 0!important;
+    }
+}

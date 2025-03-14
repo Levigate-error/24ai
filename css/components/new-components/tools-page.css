@@ -1,0 +1,140 @@
+/* Grid slider with 1 row in mobile */
+
+.tools-grid2-content__slider-pagination {
+    position: relative;
+    margin: 45px auto 0;
+}
+
+.tools-grid2-content__slider-pagination .swiper-pagination-bullet {
+    background-color: transparent;
+    border: 1px solid #000;
+    opacity: 1;
+    margin: 0 10px !important;
+    width: 10px;
+    height: 10px;
+}
+
+.tools-grid2-content__slider-pagination .swiper-pagination-bullet-active {
+    background-color: #000;
+    border: 1px solid transparent;
+}
+@media screen and (max-width: 1200px){
+    .tools-grid2-content__slider-pagination{
+        transform: translateX(0)!important;
+        left: 0!important;
+    }
+}
+
+.tools-grid2-content__slide-header-block {
+        display: flex;
+    padding: 12px;
+    gap: 12px;
+    align-items: center;
+}
+
+
+.tools-grid2__slide-icon {
+    width: 52px;
+height: 52px;
+}
+
+.tools-grid2-content__slide-title {
+color: #000;
+font-size: 18px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px; /* 133.333% */
+}
+
+#toolspage {
+    margin-top: 170px;
+}
+
+.tools-page {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: flex-start;
+    gap: 40px;
+}
+
+@media screen and (max-width: 768px){
+.tools-page {
+    grid-template-columns: repeat(2, 1fr);
+}
+}
+@media screen and (max-width: 425px){
+.tools-page {
+    grid-template-columns: repeat(1, 1fr);
+}
+}
+
+
+.tools-grid-content__slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.tools-grid-content__slide-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center;
+
+    border-radius: 12px;
+}
+
+.tools-grid-content__slide-content {
+    display: flex;
+    gap: 12px;
+
+    align-items: center;
+}
+
+.tools-grid-content__slide-content-body {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.tools-grid__slide-icon {
+    width: 24px;
+    height: 24px;
+
+    position: relative;
+}
+
+.tools-grid__slide-icon-wrapper {
+    background: #e3e9f4;
+    border-radius: 50%;
+    min-width: 48px;
+    height: 48px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.tools-grid-content__slide-title {
+    color: #000;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.tools-grid-content__slide-desc {
+    color: #8A8A8A;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+}
+
+.tools-grid_topic-title {
+    color: #000;
+    padding: 60px 30px 60px 0;
+    margin: 60px 0 0 0;
+    
+}

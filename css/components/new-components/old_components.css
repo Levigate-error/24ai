@@ -1,0 +1,183 @@
+/* Old component CSS */
+button.language-btn > a:nth-child(2) {
+    display: none;
+}
+#remove-bg-text-columns {
+    padding: 80px 60px;
+}
+.gallery-block__columns {
+    margin-top: 60px;
+}
+
+.content-tabs-content__btn {
+    margin-top: 40px;
+}
+
+#image-compare-1x1 .icv__img-a {
+    height: 650px !important;
+}
+
+
+.language-dropdown {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    /* other styles as needed */
+}
+
+.language-container {
+    position: relative;
+    display: inline-block;
+    margin-right: 24px;
+}
+
+/* Dropdown container */
+.language-dropdown {
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    width: 150px; /* Adjust as needed */
+    z-index: 1000; /* To ensure it's above other elements */
+    margin-top: 5px;
+}
+
+/* Language items */
+.language-dropdown a {
+    display: block;
+    padding: 10px 15px; 
+    text-decoration: none;
+    color: #333;
+    font-size: 14px; /* Adjust as needed */
+    border-bottom: 1px solid #eaeaea; /* Add a divider between items */
+}
+
+.language-dropdown a:last-child {
+    border-bottom: none; /* Remove the bottom border for the last item */
+}
+
+/* Flags */
+.language-dropdown img {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* Current language button */
+.language-btn {
+    display: flex;
+    align-items: center;
+    padding: 8px 19px 7px 16px;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.language-btn a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.language-btn img {
+    
+    margin-right: 10px;
+}
+
+.language-btn::before {
+   content: "";
+   border-left: 5px solid transparent;
+   border-right: 5px solid transparent;
+   border-top: 5px solid #fff;  /* Adjust the color to match your design */
+   display: inline-block;
+   margin-right: 10px;
+   vertical-align: middle;
+}
+
+
+[dir="rtl"] .language-btn::before {
+   margin-left: 10px;
+   margin-right: 0px;
+}
+
+[dir="rtl"] .language-btn img {
+   margin-left: 10px;
+   margin-right: 0px;
+}
+
+[dir="rtl"] .language-container {
+   margin-left: 24px;
+   margin-right: 0px;
+}
+[dir="rtl"] .language-dropdown img 
+    {
+   margin-right: 0px; 
+   margin-left: 10px;
+}
+
+.entry-header {
+    display: none;
+}
+
+/* Header */
+.header_content-title {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 0;
+}
+.header_content-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    align-self: stretch;
+}
+
+.header_content-icon {
+    padding: 4px;
+}
+
+.header_content_items {
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+}
+@media screen and (max-width: 1200px) {
+.header_content_items {
+    grid-template-columns: repeat(2, 1fr);
+}}
+@media screen and (max-width: 425px) {
+.header_content_items {
+    grid-template-columns: 1fr;
+}
+.header_content-title {
+    font-size: 16px;
+}
+}
+
+.header_content--item {
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+.header_content--item::-webkit-scrollbar { 
+  width: 0px;
+  height: 0px;
+}
+
+.header_content_item {
+    padding: 20px;
+    display: flex;
+    /*flex-direction: column;*/
+    /*align-items: flex-start;*/
+    gap: 7px;
+}
+
+.header_content_item:first-child {
+    flex-direction: column;
+    align-items: flex-start
+}
+
+.header_content-icon {
+    margin: 0;
+}

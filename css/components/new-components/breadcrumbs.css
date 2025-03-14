@@ -1,0 +1,39 @@
+#crumbs {
+    text-align: left;
+    margin-top: -50px;
+    margin-bottom: 50px;
+}
+
+#crumbs a {
+    text-decoration: underline;
+
+}
+
+@media (max-width: 1200px) {
+    #crumbs {
+        margin: 0;
+    }
+    .tools-breadcrumb {
+    margin-top: -30px;
+    margin-bottom: 30px;
+}
+    .blog-breadcrumb {
+        margin-top: -60px;
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 580px) {
+    .blog-breadcrumb {
+        margin-top: 60px;
+    }
+}
+.tools-breadcrumb, .tools-breadcrumb a {
+    color: white;
+}
+.blog-breadcrumb, .blog-breadcrumb a {
+    color: black;
+}
+.blog-breadcrumb svg {
+    filter: invert(100%);
+}
