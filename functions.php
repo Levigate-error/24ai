@@ -432,7 +432,6 @@ function true_loadmore() {
     wp_die();
 }
 
-
 function get_params_string(){
     $get = $_GET;
     if(!empty($get)){

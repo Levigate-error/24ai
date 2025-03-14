@@ -43,5 +43,7 @@ if ($type_card == 'card_blog') {
                 </div>
             </div>
         </div>
+        <a href="<?= get_category_link($cat[0]->cat_ID) ?>"
+           class="sidebar__category--link"><?= $sidebar_all_posts_label ?> <?= $cat[0]->name ?></a>
     </div>
 </div>

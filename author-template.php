@@ -1,6 +1,5 @@
 <?php
-/**
- * Template part for displaying posts
+/* Template Name: Author Posts Page
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
@@ -13,12 +12,12 @@ $author_info = get_userdata($author_id);
     <article  <?php post_class(); ?>>
         <div class="post-wrap">
             <div class="container">
-                
+
         <div class="blog-breadcrumb"><?php if (function_exists('the_breadcrumb')) the_breadcrumb(); ?></div>
                 <div class="post_header">
                     <? if(!empty(carbon_get_post_meta( get_the_ID(), 'header_logo' ))): ?>
                     <img src="<?php echo carbon_get_post_meta( get_the_ID(), 'header_logo' ); ?>" alt="img" class="">
-                 <? endif; ?>           
+                 <? endif; ?>
                     <p class="post_header-text"><?php echo carbon_get_post_meta( get_the_ID(), 'header_text' ); ?></p>
                     <a class="post_header-button site-btn" href="<?php echo carbon_get_post_meta( get_the_ID(), 'header_url' ); ?>" style="background: <?php echo carbon_get_post_meta( get_the_ID(), 'header_button_color' ); ?>">
                         <?php echo carbon_get_post_meta( get_the_ID(), 'header_button' ); ?>
@@ -71,31 +70,26 @@ $author_info = get_userdata($author_id);
                                 // Если аватар не установлен, можно использовать аватар по умолчанию
                                 $avatar_url = 'URL_аватара_по_умолчанию';
                             }
-//поиск автора что бы выдать ссылку на него
-                            $category = get_category_by_slug('avtory'); // Замените 'avtory' на слаг вашей категории
-                            $category_id = $category ? $category->term_id : 0;
+                            ?>
 
-                            if ($category_id) {
-                                // Создаем новый запрос для получения первого поста в категории "Авторы" с автором "Виталий Климов"
-                                $args = array(
-                                    'cat' => $category_id,
-                                    'author' =>  $author_id, // Замените на слаг автора
-                                    'posts_per_page' => 1, // Получаем только один пост
-                                );
+                            <div class="author-pic" style=" position: relative;
+    width: 100px;
+    height: 100px;
+    margin-right: 13px;
+    border-radius: 50px;
+    background: #ced4da;
+    flex-shrink: 0">
+<img style="  position: relative;
+    width: 100%;
+    max-width: 100%;
+    z-index: 1;
+    border-radius: 50px" src="<?=$avatar_url;?>">
+                            </div>
 
-                                $query = new WP_Query($args);
 
-                                // Проверяем, есть ли посты
-                                if ($query->have_posts()) {
-                                    $query->the_post();
-                                    // Получаем ссылку на пост
-                                    $post_link = get_permalink();
-
-                                }
-
-                                // Сбрасываем данные запроса
-                                wp_reset_postdata();
-                            }
+                            <?php
+                            $author_url = get_author_posts_url($author_id);
+                            echo '<a href="' . esc_url($author_url) . '">' . esc_html(get_the_author_meta('display_name', $author_id)) . '</a>';
                             ?>
 
 
@@ -103,76 +97,10 @@ $author_info = get_userdata($author_id);
 
 
 
-
-
-
-
-
-<!--                            <div class="author-pic" style=" position: relative;-->
-<!--    width: 100px;-->
-<!--    height: 100px;-->
-<!--    margin-right: 13px;-->
-<!--    border-radius: 50px;-->
-<!--    background: #ced4da;-->
-<!--    flex-shrink: 0">-->
-<!--<img style="  position: relative;-->
-<!--    width: 100%;-->
-<!--    max-width: 100%;-->
-<!--    z-index: 1;-->
-<!--    border-radius: 50px" src="--><?php //=$avatar_url;?><!--">-->
-<!--                            </div>-->
-
-
-
-<?php
-$categories = get_the_category();
-
-if (!empty($categories)) {
-    // Выводим названия категорий
-    foreach ($categories as $category) {
-
-        if ($category->cat_name!=='Авторы')
-        {
-            echo <<<HTML
-    <div class="author-pic" style=" position: relative;
-    width: 100px;
-    height: 100px;
-    margin-right: 13px;
-    border-radius: 50px;
-    background: #ced4da;
-    flex-shrink: 0">
-    <a href="{$post_link}">
-<img style="  position: relative;
-    width: 100%;
-    max-width: 100%;
-    z-index: 1;
-    border-radius: 50px" src="{$avatar_url}"></a>
-                            </div>
-
- <p id="{$author_name}" itemprop="author" itemscope itemtype="http://schema.org/Person"> Автор: <strong  itemprop="name">{$first_name} {$last_name}</strong><br>
-                               <span itemprop="jobTitle"> {$description}</span>
-                                <br><span  itemprop="email">{$author_email}</span>
+                            <p id="<?=$author_name?>" itemprop="author" itemscope itemtype="http://schema.org/Person"> Автор: <strong  itemprop="name"><?= $first_name.' '.$last_name?></strong><br>
+                               <span itemprop="jobTitle"> <?=$description?></span>
+                                <br><span  itemprop="email"><?=$author_email?></span>
                             </p>
-HTML;
-
-
-
-
-        }
-    }
-} else {
-    echo 'Нет категорий для этого поста.';
-}
-?>
-
-
-
-
-
-
-
-
-
                             <h1 class="page__blog--news__title text-black text-left"><?=the_title();?></h1>
                             <div class="post__caption--tags">
                                 <div class="tag__title"><?=the_tags();?></div>
@@ -274,12 +202,12 @@ HTML;
                     <div class="post__sidebar">
                         <?php get_template_part("template-parts/sidebar_post"); ?>
                     </div>
-                                                        
+
                 </div>
                 <div class="post_header">
                     <? if(!empty(carbon_get_post_meta( get_the_ID(), 'footer_logo' ))): ?>
                     <img src="<?php echo carbon_get_post_meta( get_the_ID(), 'footer_logo' ); ?>" alt="img" class="">
-                 <? endif; ?>           
+                 <? endif; ?>
                     <p class="post_header-text"><?php echo carbon_get_post_meta( get_the_ID(), 'footer_text' ); ?></p>
                     <a class="post_header-button site-btn" href="<?php echo carbon_get_post_meta( get_the_ID(), 'footer_url' ); ?>" style="background: <?php echo carbon_get_post_meta( get_the_ID(), 'footer_button_color' ); ?>">
                         <?php echo carbon_get_post_meta( get_the_ID(), 'footer_button' ); ?>

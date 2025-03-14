@@ -711,7 +711,7 @@
 }
 
 .post {
-    padding: 160px 0 80px;
+    padding: 160px 0 117px;
 }
 
 .post__caption {
@@ -937,7 +937,7 @@
     padding: 20px 38px 39px !important;
     /*margin-bottom: 20px;*/
     margin-bottom: 0px;
-
+    
 }
 
 .post__block--link {
@@ -1541,16 +1541,6 @@
 
 .card_news--link .left__block--content {
     padding: 100px 60px 60px 30px;
-}
-
-.height-700 .card.page__blog--item {
-    height: 700px;
-}
-.height-1000 .card.page__blog--item {
-    height: 1000px;
-}
-.height-1200 .card.page__blog--item {
-    height: 1200px;
 }
 
 @media (max-width: 1200px) {

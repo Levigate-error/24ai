@@ -112,6 +112,25 @@
     border-radius: 7px
 }
 
+.wp-banner-special {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    justify-content: center;
+    padding: 10px 60px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.wp-banner-special a {
+    background: #7F42E1;
+    color: #fff;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
 .header_logo {
     z-index: 2;
     width: 33%

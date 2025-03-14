@@ -1,10 +1,10 @@
 <?php
 $thisCat = get_the_category(get_the_ID());
 $thisCatName = $thisCat[0]->name;
-$thisCatId = $thisCat[0]->cat_ID;
 $posts4 = new WP_Query([
     'posts_per_page' => 4,
-    'cat' => $thisCatId
+    'category_name' => $thisCatName,
+    'post_type' => 'post'
 ]);
 ?>
 <?

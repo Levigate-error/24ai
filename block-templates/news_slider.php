@@ -45,7 +45,7 @@ $read_more_label = carbon_get_theme_option( 'read_more_label');
                                         <?php endif;?>
                                         <div class="page__blog--news__date">
                                             <div class="article__cat"><?=the_category(); ?></div>
-                                            <p class="page__blog--new__date"><?=get_the_date('F j, Y'); ?></p>
+                                            <p class="48 page__blog--new__date"><?=get_the_date('F j, Y'); ?></p>
                                         </div>
                                         <h1 class="page__blog--news__title"><?=the_title() ?></h1>
                                         <div class="page__blog--news__subtitle"><?=get_short_desk(80); ?></div>
