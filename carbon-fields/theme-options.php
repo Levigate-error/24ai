@@ -2273,14 +2273,186 @@ function fields_and_options()
                                                         <img alt="" src="<?= $tab['image'] ?>">
                                                     <? endif; ?>
                                                     <? if (!empty($tab['image'] and !empty($tab['image_after']))): ?>
-                                                        <div class="image-compare">
-                                                            <img class="not-lazy" loading="lazy" alt=""
+
+                                                        <style>
+                                                            .comparison-container {
+                                                                position: relative;
+                                                                overflow: hidden;
+                                                                border-radius: 15px;
+                                                                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                                                                cursor: grab;
+                                                                user-select: none;
+
+                                                                display: flex;
+                                                                width: fit-content;
+                                                                flex-direction: row-reverse;
+                                                            }
+
+                                                            .comparison-container img {
+                                                                height: auto;
+                                                                object-fit: contain;
+                                                                pointer-events: none; /* Prevent image selection */
+                                                                width: auto;
+                                                            }
+
+                                                            /* Overlay Image */
+                                                            .comparison-top {
+                                                                clip-path: inset(0 50% 0 0);
+                                                                margin-left: -100%;
+                                                            }
+
+                                                            /* Draggable Handle */
+                                                            .slider-handle {
+                                                                position: absolute;
+                                                                display: flex;
+                                                                flex-direction: column;
+                                                                justify-content: center;
+                                                                align-items: center;
+                                                                box-sizing: border-box;
+                                                                height: 100%;
+                                                                top: 0;
+                                                                z-index: 5;
+
+                                                                transform: translateX(-50%);
+                                                            }
+                                                            .slider-handle__control-line {
+                                                                height: 50%;
+                                                                width: 2px;
+                                                                z-index: 6;
+                                                            }
+                                                            .slider-handle__control__circle {
+                                                                width: 50px;
+                                                                height: 50px;
+                                                                box-sizing: border-box;
+                                                                flex-shrink: 0;
+                                                                border-radius: 50%;
+                                                            }
+                                                            .slider-handle__theme-wrapper {
+                                                                width: 100%;
+                                                                height: 100%;
+                                                                display: flex;
+                                                                justify-content: space-between;
+                                                                align-items: center;
+                                                                position: absolute;
+                                                                z-index: 5;
+                                                            }
+                                                            .slider-handle__arrow-wrapper {
+                                                                display: flex;
+                                                                justify-content: center;
+                                                                align-items: center;
+                                                                transition: all 0.1s ease-out 0s;
+                                                            }
+                                                        </style>
+
+                                                        <div class="image-compare comparison-container">
+                                                            <img class="not-lazy comparison-top" loading="lazy" alt=""
                                                                  src="<?= $tab['image'] ?> itemscope itemtype=" https://schema.org/ImageObject"">
                                                             <img style="width:auto;" class="not-lazy" loading="lazy"
                                                                  alt=""
                                                                  src="<?= $tab['image_after'] ?> itemscope itemtype="
                                                                  https://schema.org/ImageObject"">
+                                                            <div class="slider-handle" style="left: 50%">
+                                                                <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
+                                                                <div class="slider-handle__control__circle" style="backdrop-filter: blur(5px); border: 2px solid rgb(255, 255, 255);"></div>
+                                                                <div class="slider-handle__theme-wrapper">
+                                                                    <div class="slider-handle__arrow-wrapper" style="transform: translateX(5px);">
+                                                                        <svg height="15" width="15" style="transform: scale(0.7) rotateZ(180deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
+                                                                            <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
+                                                                        </svg>
+                                                                    </div>
+                                                                    <div class="slider-handle__arrow-wrapper" style="transform: translateX(-5px);">
+                                                                        <svg height="15" width="15" style="transform: scale(0.7); rotateZ(0deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
+                                                                            <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
+                                                                        </svg>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
+                                                            </div>
                                                         </div>
+
+                                                        <script>
+                                                          function updateParentWidth() {
+                                                            const parents = document.querySelectorAll(".comparison-container");
+
+
+                                                            parents.forEach((parent) => {
+                                                              const child = parent.querySelector("img");
+
+                                                              if (child && parent) {
+                                                                parent.style.width = `${child.offsetWidth}px`;
+                                                              }
+                                                            });
+                                                          }
+
+                                                          // Run on load & on window resize
+                                                          window.addEventListener("load", updateParentWidth);
+                                                          window.addEventListener("resize", updateParentWidth);
+                                                          document.querySelectorAll(".comparison-container").forEach((container) => {
+                                                            const sliderHandle = container.querySelector(".slider-handle");
+                                                            const topImage = container.querySelector(".comparison-top");
+
+                                                            let isDragging = false;
+
+                                                            function updateSliderPosition(x) {
+                                                              let rect = container.getBoundingClientRect();
+                                                              let offsetX = x - rect.left;
+                                                              let percent = (offsetX / rect.width) * 100;
+                                                              percent = Math.max(0, Math.min(100, percent));
+
+                                                              topImage.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+                                                              sliderHandle.style.left = `${percent}%`;
+                                                            }
+
+                                                            function onMouseMove(e) {
+                                                              if (isDragging) {
+                                                                updateSliderPosition(e.clientX);
+                                                              }
+                                                            }
+
+                                                            function onTouchMove(e) {
+                                                              if (isDragging) {
+                                                                updateSliderPosition(e.touches.item(0).clientX);
+                                                              }
+                                                            }
+
+                                                            function onMouseUp() {
+                                                              isDragging = false;
+                                                              document.body.style.cursor = "default";
+
+                                                              document.removeEventListener("mousemove", onMouseMove);
+                                                              document.removeEventListener("mouseup", onMouseUp);
+
+                                                              document.removeEventListener("touchmove", onTouchMove);
+                                                              document.removeEventListener("touchend", onMouseUp);
+                                                            }
+
+                                                            sliderHandle.addEventListener("mousedown", (e) => {
+                                                              e.preventDefault();
+                                                              isDragging = true;
+                                                              document.body.style.cursor = "grabbing";
+
+                                                              document.addEventListener("mousemove", onMouseMove);
+                                                              document.addEventListener("mouseup", onMouseUp);
+                                                            });
+
+                                                            sliderHandle.addEventListener("touchstart", (e) => {
+                                                              e.preventDefault();
+
+                                                              isDragging = true;
+                                                              document.body.style.cursor = "grabbing";
+
+                                                              document.addEventListener("touchmove", onTouchMove);
+                                                              document.addEventListener("touchend", onMouseUp);
+                                                            })
+
+                                                            // Click anywhere on the container to instantly move slider
+                                                            container.addEventListener("click", (e) => {
+                                                              if (e.target !== sliderHandle) {
+                                                                updateSliderPosition(e.clientX);
+                                                              }
+                                                            });
+                                                          });
+                                                        </script>
                                                     <? endif; ?>
                                                 </div>
                                             </div>
@@ -2809,18 +2981,190 @@ function fields_and_options()
                         </div>
                         <div class="before-after__content-wrapper">
                             <div class="image_compare-block"><? if (!empty($image_after) and !empty($image_before)): ?>
-                                    <div class="image-compare">
+
+                                    <style>
+                                        .comparison-container {
+                                            position: relative;
+                                            overflow: hidden;
+                                            border-radius: 15px;
+                                            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                                            cursor: grab;
+                                            user-select: none;
+
+                                            display: flex;
+                                            width: fit-content;
+                                            flex-direction: row-reverse;
+                                        }
+
+                                        .comparison-container img {
+                                            height: auto;
+                                            object-fit: contain;
+                                            pointer-events: none; /* Prevent image selection */
+                                            width: auto;
+                                        }
+
+                                        /* Overlay Image */
+                                        .comparison-top {
+                                            clip-path: inset(0 50% 0 0);
+                                            margin-left: -100%;
+                                        }
+
+                                        /* Draggable Handle */
+                                        .slider-handle {
+                                            position: absolute;
+                                            display: flex;
+                                            flex-direction: column;
+                                            justify-content: center;
+                                            align-items: center;
+                                            box-sizing: border-box;
+                                            height: 100%;
+                                            top: 0;
+                                            z-index: 5;
+
+                                            transform: translateX(-50%);
+                                        }
+                                        .slider-handle__control-line {
+                                            height: 50%;
+                                            width: 2px;
+                                            z-index: 6;
+                                        }
+                                        .slider-handle__control__circle {
+                                            width: 50px;
+                                            height: 50px;
+                                            box-sizing: border-box;
+                                            flex-shrink: 0;
+                                            border-radius: 50%;
+                                        }
+                                        .slider-handle__theme-wrapper {
+                                            width: 100%;
+                                            height: 100%;
+                                            display: flex;
+                                            justify-content: space-between;
+                                            align-items: center;
+                                            position: absolute;
+                                            z-index: 5;
+                                        }
+                                        .slider-handle__arrow-wrapper {
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            transition: all 0.1s ease-out 0s;
+                                        }
+                                    </style>
+
+                                    <div class="image-compare comparison-container">
                                         <? if (!empty($image_after)): ?>
                                             <? $image_after = ImageResizeWordPress::resizeWidthWebp($image_after, 1450) ?>
                                             <img loading="lazy" width="1050" height="700" alt="img"
-                                                 class="before-after__img not-lazy" src="<?= $image_after ?>">
+                                                 class="before-after__img comparison-top not-lazy" src="<?= $image_after ?>">
                                         <? endif; ?>
                                         <? if (!empty($image_before)): ?>
                                             <? $image_before = ImageResizeWordPress::resizeWidthWebp($image_before, 1450) ?>
                                             <img loading="lazy" width="1050" height="700" alt="img"
                                                  class="before-after__img not-lazy" src="<?= $image_before ?>">
                                         <? endif; ?>
+                                        <div class="slider-handle" style="left: 50%">
+                                            <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
+                                            <div class="slider-handle__control__circle" style="backdrop-filter: blur(5px); border: 2px solid rgb(255, 255, 255);"></div>
+                                            <div class="slider-handle__theme-wrapper">
+                                                <div class="slider-handle__arrow-wrapper" style="transform: translateX(5px);">
+                                                    <svg height="15" width="15" style="transform: scale(0.7) rotateZ(180deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
+                                                        <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
+                                                    </svg>
+                                                </div>
+                                                <div class="slider-handle__arrow-wrapper" style="transform: translateX(-5px);">
+                                                    <svg height="15" width="15" style="transform: scale(0.7); rotateZ(0deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
+                                                        <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
+                                        </div>
                                     </div>
+
+                                    <script>
+                                      function updateParentWidth() {
+                                        const parents = document.querySelectorAll(".comparison-container");
+
+
+                                        parents.forEach((parent) => {
+                                          const child = parent.querySelector("img");
+
+                                          if (child && parent) {
+                                            parent.style.width = `${child.offsetWidth}px`;
+                                          }
+                                        });
+                                      }
+
+                                      // Run on load & on window resize
+                                      window.addEventListener("load", updateParentWidth);
+                                      window.addEventListener("resize", updateParentWidth);
+                                      document.querySelectorAll(".comparison-container").forEach((container) => {
+                                        const sliderHandle = container.querySelector(".slider-handle");
+                                        const topImage = container.querySelector(".comparison-top");
+
+                                        let isDragging = false;
+
+                                        function updateSliderPosition(x) {
+                                          let rect = container.getBoundingClientRect();
+                                          let offsetX = x - rect.left;
+                                          let percent = (offsetX / rect.width) * 100;
+                                          percent = Math.max(0, Math.min(100, percent));
+
+                                          topImage.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+                                          sliderHandle.style.left = `${percent}%`;
+                                        }
+
+                                        function onMouseMove(e) {
+                                          if (isDragging) {
+                                            updateSliderPosition(e.clientX);
+                                          }
+                                        }
+
+                                        function onTouchMove(e) {
+                                          if (isDragging) {
+                                            updateSliderPosition(e.touches.item(0).clientX);
+                                          }
+                                        }
+
+                                        function onMouseUp() {
+                                          isDragging = false;
+                                          document.body.style.cursor = "default";
+
+                                          document.removeEventListener("mousemove", onMouseMove);
+                                          document.removeEventListener("mouseup", onMouseUp);
+
+                                          document.removeEventListener("touchmove", onTouchMove);
+                                          document.removeEventListener("touchend", onMouseUp);
+                                        }
+
+                                        sliderHandle.addEventListener("mousedown", (e) => {
+                                          e.preventDefault();
+                                          isDragging = true;
+                                          document.body.style.cursor = "grabbing";
+
+                                          document.addEventListener("mousemove", onMouseMove);
+                                          document.addEventListener("mouseup", onMouseUp);
+                                        });
+
+                                        sliderHandle.addEventListener("touchstart", (e) => {
+                                          e.preventDefault();
+
+                                          isDragging = true;
+                                          document.body.style.cursor = "grabbing";
+
+                                          document.addEventListener("touchmove", onTouchMove);
+                                          document.addEventListener("touchend", onMouseUp);
+                                        })
+
+                                        // Click anywhere on the container to instantly move slider
+                                        container.addEventListener("click", (e) => {
+                                          if (e.target !== sliderHandle) {
+                                            updateSliderPosition(e.clientX);
+                                          }
+                                        });
+                                      });
+                                    </script>
                                 <? endif; ?>
                                 <div class="bottom-left"><?= $before_text ?></div>
                                 <div class="bottom-right"><?= $after_text ?></div>
@@ -3267,11 +3611,82 @@ function fields_and_options()
                                         <div class="swiper-slide" itemtype="https://schema.org/Product">
                                             <div class="gallery-block__content-wrapper">
                                                 <? if (!empty($image_after) and !empty($image_before)): ?>
-                                                    <div class="image-compare">
+
+                                                    <style>
+                                                        .comparison-container {
+                                                            position: relative;
+                                                            overflow: hidden;
+                                                            border-radius: 15px;
+                                                            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                                                            cursor: grab;
+                                                            user-select: none;
+
+                                                            display: flex;
+                                                            width: fit-content;
+                                                            flex-direction: row-reverse;
+                                                        }
+
+                                                        .comparison-container img {
+                                                            height: auto;
+                                                            object-fit: contain;
+                                                            pointer-events: none; /* Prevent image selection */
+                                                            width: auto;
+                                                        }
+
+                                                        /* Overlay Image */
+                                                        .comparison-top {
+                                                            clip-path: inset(0 50% 0 0);
+                                                            margin-left: -100%;
+                                                        }
+
+                                                        /* Draggable Handle */
+                                                        .slider-handle {
+                                                            position: absolute;
+                                                            display: flex;
+                                                            flex-direction: column;
+                                                            justify-content: center;
+                                                            align-items: center;
+                                                            box-sizing: border-box;
+                                                            height: 100%;
+                                                            top: 0;
+                                                            z-index: 5;
+
+                                                            transform: translateX(-50%);
+                                                        }
+                                                        .slider-handle__control-line {
+                                                            height: 50%;
+                                                            width: 2px;
+                                                            z-index: 6;
+                                                        }
+                                                        .slider-handle__control__circle {
+                                                            width: 50px;
+                                                            height: 50px;
+                                                            box-sizing: border-box;
+                                                            flex-shrink: 0;
+                                                            border-radius: 50%;
+                                                        }
+                                                        .slider-handle__theme-wrapper {
+                                                            width: 100%;
+                                                            height: 100%;
+                                                            display: flex;
+                                                            justify-content: space-between;
+                                                            align-items: center;
+                                                            position: absolute;
+                                                            z-index: 5;
+                                                        }
+                                                        .slider-handle__arrow-wrapper {
+                                                            display: flex;
+                                                            justify-content: center;
+                                                            align-items: center;
+                                                            transition: all 0.1s ease-out 0s;
+                                                        }
+                                                    </style>
+
+                                                    <div class="image-compare comparison-container">
                                                         <? if (!empty($image_after)): ?>
                                                             <? $image_after = ImageResizeWordPress::resizeWidthWebp($image_after, 1450) ?>
                                                             <img loading="lazy" width="1050" height="700" alt="img"
-                                                                 class="gallery-block__img not-lazy"
+                                                                 class="gallery-block__img comparison-top not-lazy"
                                                                  src="<?= $image_after ?>">
                                                         <? endif; ?>
                                                         <? if (!empty($image_before)): ?>
@@ -3280,7 +3695,108 @@ function fields_and_options()
                                                                  class="gallery-block__img not-lazy"
                                                                  src="<?= $image_before ?>">
                                                         <? endif; ?>
+                                                        <div class="slider-handle" style="left: 50%">
+                                                            <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
+                                                            <div class="slider-handle__control__circle" style="backdrop-filter: blur(5px); border: 2px solid rgb(255, 255, 255);"></div>
+                                                            <div class="slider-handle__theme-wrapper">
+                                                                <div class="slider-handle__arrow-wrapper" style="transform: translateX(5px);">
+                                                                    <svg height="15" width="15" style="transform: scale(0.7) rotateZ(180deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
+                                                                        <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
+                                                                    </svg>
+                                                                </div>
+                                                                <div class="slider-handle__arrow-wrapper" style="transform: translateX(-5px);">
+                                                                    <svg height="15" width="15" style="transform: scale(0.7); rotateZ(0deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
+                                                                        <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
+                                                                    </svg>
+                                                                </div>
+                                                            </div>
+                                                            <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
+                                                        </div>
                                                     </div>
+
+                                                    <script>
+                                                      function updateParentWidth() {
+                                                        const parents = document.querySelectorAll(".comparison-container");
+
+
+                                                        parents.forEach((parent) => {
+                                                          const child = parent.querySelector("img");
+
+                                                          if (child && parent) {
+                                                            parent.style.width = `${child.offsetWidth}px`;
+                                                          }
+                                                        });
+                                                      }
+
+                                                      // Run on load & on window resize
+                                                      window.addEventListener("load", updateParentWidth);
+                                                      window.addEventListener("resize", updateParentWidth);
+                                                      document.querySelectorAll(".comparison-container").forEach((container) => {
+                                                        const sliderHandle = container.querySelector(".slider-handle");
+                                                        const topImage = container.querySelector(".comparison-top");
+
+                                                        let isDragging = false;
+
+                                                        function updateSliderPosition(x) {
+                                                          let rect = container.getBoundingClientRect();
+                                                          let offsetX = x - rect.left;
+                                                          let percent = (offsetX / rect.width) * 100;
+                                                          percent = Math.max(0, Math.min(100, percent));
+
+                                                          topImage.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+                                                          sliderHandle.style.left = `${percent}%`;
+                                                        }
+
+                                                        function onMouseMove(e) {
+                                                          if (isDragging) {
+                                                            updateSliderPosition(e.clientX);
+                                                          }
+                                                        }
+
+                                                        function onTouchMove(e) {
+                                                          if (isDragging) {
+                                                            updateSliderPosition(e.touches.item(0).clientX);
+                                                          }
+                                                        }
+
+                                                        function onMouseUp() {
+                                                          isDragging = false;
+                                                          document.body.style.cursor = "default";
+
+                                                          document.removeEventListener("mousemove", onMouseMove);
+                                                          document.removeEventListener("mouseup", onMouseUp);
+
+                                                          document.removeEventListener("touchmove", onTouchMove);
+                                                          document.removeEventListener("touchend", onMouseUp);
+                                                        }
+
+                                                        sliderHandle.addEventListener("mousedown", (e) => {
+                                                          e.preventDefault();
+                                                          isDragging = true;
+                                                          document.body.style.cursor = "grabbing";
+
+                                                          document.addEventListener("mousemove", onMouseMove);
+                                                          document.addEventListener("mouseup", onMouseUp);
+                                                        });
+
+                                                        sliderHandle.addEventListener("touchstart", (e) => {
+                                                          e.preventDefault();
+
+                                                          isDragging = true;
+                                                          document.body.style.cursor = "grabbing";
+
+                                                          document.addEventListener("touchmove", onTouchMove);
+                                                          document.addEventListener("touchend", onMouseUp);
+                                                        })
+
+                                                        // Click anywhere on the container to instantly move slider
+                                                        container.addEventListener("click", (e) => {
+                                                          if (e.target !== sliderHandle) {
+                                                            updateSliderPosition(e.clientX);
+                                                          }
+                                                        });
+                                                      });
+                                                    </script>
                                                 <? endif; ?>
                                             </div>
 

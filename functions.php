@@ -316,9 +316,10 @@ function orm_scripts() {
 
     wp_enqueue_script( 'main-js', get_template_directory_uri() . '/js/main.min.js', array(), _S_VERSION, true );
     wp_enqueue_script( 'scripts', get_template_directory_uri() . '/js/app.min.js', array(), _S_VERSION, true );
+    wp_enqueue_script( 'loadmore-js', get_template_directory_uri() . '/js/loadmore.js', array(), _S_VERSION, true );
 
     if (is_page('24blog')){
-        wp_enqueue_script( 'loadmore-js', get_template_directory_uri() . '/js/loadmore.js', array(), _S_VERSION, true );
+
     }
 
 //	wp_enqueue_script( 'scripts', get_template_directory_uri() . '/js/all_media.js', array(), _S_VERSION, true );
