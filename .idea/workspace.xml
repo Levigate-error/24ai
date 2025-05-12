@@ -5,12 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f3731a4b-111c-4203-9539-b83e121128b9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/carbon-fields/theme-options.php" beforeDir="false" afterPath="$PROJECT_DIR$/carbon-fields/theme-options.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/components/new-components/agregator.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/components/new-components/agregator.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/main.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/main.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/media_page.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/media_page.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/media_page.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/media_page.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/footer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/app.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/app.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template-parts/content.php" beforeDir="false" afterPath="$PROJECT_DIR$/template-parts/content.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +23,13 @@
   <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -47,7 +57,9 @@
     &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;stage&quot;,
+    &quot;ignore_missing_gitignore&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;E:/Projects/back/smet-landing&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -90,6 +102,18 @@
       <workItem from="1743409500846" duration="2662000" />
       <workItem from="1743428881974" duration="376000" />
       <workItem from="1743429837319" duration="655000" />
+      <workItem from="1743861071164" duration="3032000" />
+      <workItem from="1743932424181" duration="21010000" />
+      <workItem from="1744012360517" duration="12306000" />
+      <workItem from="1745259791068" duration="3461000" />
+      <workItem from="1745310636463" duration="1727000" />
+      <workItem from="1745329997658" duration="836000" />
+      <workItem from="1745400524654" duration="765000" />
+      <workItem from="1745491882778" duration="2178000" />
+      <workItem from="1745522003973" duration="5157000" />
+      <workItem from="1746887274386" duration="131000" />
+      <workItem from="1746889917928" duration="329000" />
+      <workItem from="1747035695028" duration="2927000" />
     </task>
     <servers />
   </component>
