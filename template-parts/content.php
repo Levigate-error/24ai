@@ -156,20 +156,19 @@
     </article>
     <?php
     // Подключаем форму комментариев
-    if (comments_open()):
-        comment_form([
-            'title_reply' => 'Оставьте комментарий',
-            'comment_notes_before' => '',
-            'comment_notes_after' => '',
-            'fields' => [
-                'author' => '<p style="display:none;"><input id="author" name="author" type="hidden" value="anonymous"></p>',
-                'email'  => '<p style="display:none;"><input id="email" name="email" type="hidden" value="anonymous@example.com"></p>',
-            ],
-            'comment_field' => '<p><label for="comment">Комментарий</label><br><textarea id="comment" name="comment" required></textarea></p>',
-            'label_submit' => 'Отправить',
-            'cookies' => ''
-        ]);
-    endif; ?>
+    comment_form([
+        'title_reply' => 'Оставьте комментарий',
+        'comment_notes_before' => '',
+        'comment_notes_after' => '',
+        'fields' => [
+            'author' => '<p style="display:none;"><input id="author" name="author" type="hidden" value="anonymous"></p>',
+            'email'  => '<p style="display:none;"><input id="email" name="email" type="hidden" value="anonymous@example.com"></p>',
+        ],
+        'comment_field' => '<p><label for="comment">Комментарий</label><br><textarea id="comment" name="comment" required></textarea></p>',
+        'label_submit' => 'Отправить',
+        'cookies' => ''
+    ]);
+    ?>
     <?php get_template_part("block-templates/more_news"); ?>
     <?php get_template_part("block-templates/all_media"); ?>
 </div>
