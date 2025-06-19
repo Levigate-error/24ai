@@ -1,30 +1,29 @@
-document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener('DOMContentLoaded', () => {
 
-    let copyLinkW = document.querySelector('.copy_link');
-    if (copyLinkW){
-        async function copyPageUrl() {
-            try {
-                await navigator.clipboard.writeText(location.href);
-                // console.log('URL страницы скопирован в буфер обмена');
-            } catch (err) {
-                // console.error('Не удалось скопировать: ', err);
-            }
-        }
-        const copyLink = document.querySelectorAll('.copy_link');
-        copyLink.forEach((button) => {
-            button.addEventListener("click", (e) => {
-                // e.preventDefault();
-                const copyLinkText = button.querySelector('.copy_link-text');
-                copyPageUrl();
-                copyLinkText.classList.add('active');
-                setInterval(function (){
-                    copyLinkText.classList.remove('active');
-                },1000)
-            });
-        });
+  let copyLinkW = document.querySelector('.copy_link');
+  if (copyLinkW){
+    async function copyPageUrl() {
+      try {
+        await navigator.clipboard.writeText(location.href);
+        // console.log('URL страницы скопирован в буфер обмена');
+      } catch (err) {
+        // console.error('Не удалось скопировать: ', err);
+      }
     }
-	
+    const copyLink = document.querySelectorAll('.copy_link');
+    copyLink.forEach((button) => {
+      button.addEventListener("click", (e) => {
+        // e.preventDefault();
+        const copyLinkText = button.querySelector('.copy_link-text');
+        copyPageUrl();
+        copyLinkText.classList.add('active');
+        setInterval(function (){
+          copyLinkText.classList.remove('active');
+        },1000)
+      });
+    });
+  }
+
 // 	    $(function () {
 //         var input = document.querySelectorAll(".phone");
 //         var iti_el = $('.iti.iti--allow-dropdown.iti--separate-dial-code');
@@ -61,55 +60,54 @@ document.addEventListener('DOMContentLoaded', () => {
 //         }
 //     })
 
-    $(function () {
-        var input = document.querySelectorAll(".phone");
-        var iti_el = $('.iti.iti--allow-dropdown.iti--separate-dial-code');
-        if(iti_el.length){
-            iti.destroy();
-        }
-        for(var i = 0; i < input.length; i++){
-			
-            iti = intlTelInput(input[i], {
-                autoHideDialCode: false,
-                autoPlaceholder: "polite",
-				separateDialCode: true,
-                initialCountry: "auto",
-                preferredCountries: ['ru','th'],
-                customPlaceholder:function(selectedCountryPlaceholder,selectedCountryData){
-                    return ''+selectedCountryPlaceholder.replace(/[0-9]/g,'0');
-                },
-                geoIpLookup: function(callback) {
-                    $.get('https://ipinfo.io', function() {}, "jsonp").always(function(resp) {
-                        var countryCode = (resp && resp.country) ? resp.country : "";
-                        callback(countryCode);
-                    });
-                },
-               utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.0/js/utils.js" // just for
-            });
-			
-		var inputEl = input[i];
-		var goodKey = '0123456789+ ';
+  $(function () {
+    var input = document.querySelectorAll(".phone");
+    var iti_el = $('.iti.iti--allow-dropdown.iti--separate-dial-code');
+    if(iti_el.length){
+      iti.destroy();
+    }
+    for(var i = 0; i < input.length; i++){
 
-		var checkInputTel = function(e) {
-		  var key = (typeof e.which == "number") ? e.which : e.keyCode;
-		  var start = this.selectionStart,
-			end = this.selectionEnd;
+      iti = intlTelInput(input[i], {
+        autoHideDialCode: false,
+        autoPlaceholder: "polite",
+        separateDialCode: true,
+        initialCountry: "auto",
+        preferredCountries: ['ru','th'],
+        customPlaceholder:function(selectedCountryPlaceholder,selectedCountryData){
+          return ''+selectedCountryPlaceholder.replace(/[0-9]/g,'0');
+        },
+        geoIpLookup: function(callback) {
+          $.get('https://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+            var countryCode = (resp && resp.country) ? resp.country : "";
+            callback(countryCode);
+          });
+        },
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.0/js/utils.js" // just for
+      });
 
-		  var filtered = this.value.split('').filter(filterInput);
-		  this.value = filtered.join("");
+      var inputEl = input[i];
+      var goodKey = '0123456789+ ';
 
-		  var move = (filterInput(String.fromCharCode(key)) || (key == 0 || key == 8)) ? 0 : 1;
-		  this.setSelectionRange(start - move, end - move);
-		}
+      var checkInputTel = function(e) {
+        var key = (typeof e.which == "number") ? e.which : e.keyCode;
+        var start = this.selectionStart,
+          end = this.selectionEnd;
 
-		var filterInput = function(val) {
-		  return (goodKey.indexOf(val) > -1);
-		}
+        var filtered = this.value.split('').filter(filterInput);
+        this.value = filtered.join("");
 
-		inputEl.addEventListener('input', checkInputTel);
+        var move = (filterInput(String.fromCharCode(key)) || (key == 0 || key == 8)) ? 0 : 1;
+        this.setSelectionRange(start - move, end - move);
+      }
 
-        }
-		
-    })
+      var filterInput = function(val) {
+        return (goodKey.indexOf(val) > -1);
+      }
+
+      inputEl.addEventListener('input', checkInputTel);
+    }
+
+  })
 
 });

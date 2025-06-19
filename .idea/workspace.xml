@@ -5,15 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f3731a4b-111c-4203-9539-b83e121128b9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/!!footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/!!footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/!footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/!footer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/components/new-components/agregator.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/components/new-components/agregator.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/main.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/main.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/media_page.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/media_page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/media_page.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/media_page.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carbon-fields/theme-options.php" beforeDir="false" afterPath="$PROJECT_DIR$/carbon-fields/theme-options.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/components/new-components/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/components/new-components/footer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/home_page.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/home_page.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/home_page.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/home_page.min.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/footer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template-parts/content.php" beforeDir="false" afterPath="$PROJECT_DIR$/template-parts/content.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/custom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/main.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.min.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,10 +119,34 @@
       <workItem from="1746887274386" duration="131000" />
       <workItem from="1746889917928" duration="329000" />
       <workItem from="1747035695028" duration="2927000" />
+      <workItem from="1747211110815" duration="150000" />
+      <workItem from="1747692840622" duration="5376000" />
+      <workItem from="1747989547426" duration="1895000" />
+      <workItem from="1748248300624" duration="935000" />
+      <workItem from="1748461859277" duration="7193000" />
+      <workItem from="1748611547023" duration="1141000" />
+      <workItem from="1748818496483" duration="3708000" />
+      <workItem from="1748857181642" duration="1035000" />
+      <workItem from="1749556134348" duration="5437000" />
+      <workItem from="1749574946802" duration="3149000" />
+      <workItem from="1749595489683" duration="4216000" />
+      <workItem from="1749600408494" duration="4000" />
+      <workItem from="1750326099238" duration="2330000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/carbon-fields/theme-options.php</url>
+          <line>274</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

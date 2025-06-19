@@ -94,6 +94,16 @@ function fields_and_options()
                     Field::make('checkbox', 'billing_modal_list_item_is_individual', 'Is billing individual')->set_default_value(false),
 
                     Field::make('text', 'billing_modal_list_item_bonus', 'Billing benefit'),
+                    Field::make('file', 'billing_modal_prefix_svg_icon', 'Billing benefit prefix icon')
+                        ->set_value_type('url')
+                        ->set_type(['image/png'])
+                        ->set_help_text('Upload an PNG icon. Only PNG files are allowed.'),
+                    Field::make('text', 'billing_modal_prefix_svg_icon_height', 'Billing benefit prefix icon height'),
+                    Field::make('file', 'billing_modal_suffix_svg_icon', 'Billing benefit suffix icon')
+                        ->set_value_type('url')
+                        ->set_type(['image/png'])
+                        ->set_help_text('Upload an SVG icon. Only SVG files are allowed.'),
+                    Field::make('text', 'billing_modal_suffix_svg_icon_height', 'Billing benefit suffix icon height'),
 
                     Field::make('text', 'billing_modal_list_item_btn', 'Billing button text'),
                     Field::make('text', 'billing_modal_list_item_btn_link', 'Billing button link'),
@@ -108,6 +118,7 @@ function fields_and_options()
                     Field::make('color', 'billing_modal_list_item_sub_post_price_color', 'Billing price subtext post text color'),
 
                     Field::make('text', 'billing_modal_list_item_count', 'Billing item count'),
+                    Field::make('checkbox', 'billing_modal_list_item_count_infinite', 'Is billing count infinite'),
                     Field::make('color', 'billing_modal_list_item_count_color', 'Billing item count color'),
                     Field::make('text', 'billing_modal_list_item_count_subs', 'Billing item subtext'),
                     Field::make('color', 'billing_modal_list_item_count_subs_color', 'Billing item subtext color'),
@@ -643,7 +654,7 @@ function fields_and_options()
                                     ><?= esc_html($fields['hero_btn_text']) ?></a>
                                 <? endif; ?>
                                 <? if (!empty($fields['hero_btn_2_link']) and !empty($fields['hero_btn_2_text'])): ?>
-                                    <a target="_blank"
+                                    <a target="_blank" rel="noopener noreferrer"
                                        href="<?= $fields['hero_btn_2_link'] . get_params_string() ?>"
                                        class="site-btn site-hero__btn btn-<?= $fields['invert_btn_2']; ?>"
                                        style="color: <?= $fields['hero_btn_2_text_color'] ?>; border: 1px solid <?= $fields['hero_btn_2_border_color'] ?>; background: <?= $btn_2_bg ?>;"
@@ -751,7 +762,7 @@ function fields_and_options()
                                     ><?= esc_html($fields['hero_btn_text']) ?></a>
                                 <? endif; ?>
                                 <? if (!empty($fields['hero_btn_2_link']) and !empty($fields['hero_btn_2_text'])): ?>
-                                    <a target="_blank"
+                                    <a target="_blank" rel="noopener noreferrer"
                                        href="<?= $fields['hero_btn_2_link'] . get_params_string() ?>"
                                        class="site-btn site-hero__btn btn-<?= $fields['invert_btn_2']; ?>"
                                        style="color: <?= $fields['hero_btn_2_text_color'] ?>; border: 1px solid <?= $fields['hero_btn_2_border_color'] ?>; background: <?= $btn_2_bg ?>;"
@@ -988,11 +999,11 @@ function fields_and_options()
 
                     @media screen and (max-width: 720px) {
                         # <?= $hero_id ?> {
-                    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(' <?= $background_hero_image_mobile ?> ');
-                    background-position: center center;
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                }
+                        background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(' <?= $background_hero_image_mobile ?> ');
+                        background-position: center center;
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                    }
                     }
                 </style>
             <? endif; ?>
@@ -1081,7 +1092,7 @@ function fields_and_options()
                                         document.removeEventListener('scroll', onScroll);
                                       });
 
-                                    }, 2000); // 2 seconds delay
+                                    }, 200); // 2 seconds delay
                                   });
                                 </script>
                             </div>
@@ -1679,7 +1690,7 @@ function fields_and_options()
                                             <div style="color: <?= $banner['desc_color'] ?>"
                                                  class="banner-type-1__desc"><?= $banner['desc'] ?></div>
                                             <? if ($banner['btn_text']) { ?>
-                                                <a target="_blank"
+                                                <a target="_blank" rel="noopener noreferrer"
                                                    class="site-btn banner-type-1__btn <?= $btn_class_random ?>"
                                                    href="<?= $banner['btn_link'] . get_params_string() ?>"><?= $banner['btn_text'] ?></a>
                                             <? } ?>
@@ -1715,7 +1726,7 @@ function fields_and_options()
                                                  class="banner-type-1__desc2"
                                                  itemprop="text"><?= $banner['desc2'] ?></div>
                                             <? if ($banner['btn_text']) { ?>
-                                                <a itemprop="url" target="_blank"
+                                                <a itemprop="url" target="_blank" rel="noopener noreferrer"
                                                    class="site-btn banner-type-1__btn <?= $btn_class_random ?>"
                                                    href="<?= $banner['btn_link'] . get_params_string() ?>"><?= $banner['btn_text'] ?></a>
                                             <? } ?>
@@ -1749,7 +1760,7 @@ function fields_and_options()
                                                  class="banner-type-1__desc2"
                                                  itemprop="text"><?= $banner['desc2'] ?></div>
                                             <? if ($banner['btn_text']) { ?>
-                                                <a target="_blank" itemprop="url"
+                                                <a target="_blank" itemprop="url" rel="noopener noreferrer"
                                                    style="background: <?= $banner['btn_background_color'] ?>; color: <?= $banner['btn_text_color'] ?>; border-color: <?= $banner['btn_text_color'] ?>"
                                                    class="site-btn banner-type-1__btn"
                                                    href="<?= $banner['btn_link'] . get_params_string() ?>"><?= $banner['btn_text'] ?></a>
@@ -1784,7 +1795,7 @@ function fields_and_options()
                                             <div style="color: <?= $banner['desc2_color'] ?>"
                                                  class="banner-type-1__desc2"><?= $banner['desc2'] ?></div>
                                             <? if ($banner['btn_text']) { ?>
-                                                <a target="_blank"
+                                                <a target="_blank" rel="noopener noreferrer"
                                                    class="site-btn banner-type-1__btn <?= $btn_class_random ?>"
                                                    href="<?= $banner['btn_link'] . get_params_string() ?>"><?= $banner['btn_text'] ?></a>
                                             <? } ?>
@@ -1815,7 +1826,7 @@ function fields_and_options()
                                             </div>
                                         </div>
                                         <? if ($banner['btn_text']) { ?>
-                                            <a target="_blank"
+                                            <a target="_blank" rel="noopener noreferrer"
                                                class="site-btn banner-type-2__btn <?= $btn_class_random ?>"
                                                href="<?= $banner['btn_link'] . get_params_string() ?>"><?= $banner['btn_text'] ?></a>
                                         <? } ?>
@@ -1847,7 +1858,7 @@ function fields_and_options()
 
                                         </div>
                                         <? if ($banner['btn_text']) { ?>
-                                            <a target="_blank"
+                                            <a target="_blank" rel="noopener noreferrer"
                                                class="site-btn banner-type-2__btn <?= $btn_class_random ?>"
                                                href="<?= $banner['btn_link'] . get_params_string() ?>"><?= $banner['btn_text'] ?></a>
                                         <? } ?>
@@ -1862,7 +1873,7 @@ function fields_and_options()
                                             <div style="color: <?= $banner['desc_color'] ?>"
                                                  class="banner-type-3__desc"><?= $banner['desc'] ?></div>
                                             <? if (!empty($banner['btn_text'])): ?>
-                                                <a target="_blank"
+                                                <a target="_blank" rel="noopener noreferrer"
                                                    style="background: <?= $banner['btn_background_color'] ?>; color: <?= $banner['btn_text_color'] ?>; border-color: <?= $banner['btn_text_color'] ?>"
                                                    class="site-btn banner-type-3__btn"
                                                    href="<?= $banner['btn_link'] . get_params_string() ?>"><?= $banner['btn_text'] ?></a>
@@ -1928,7 +1939,7 @@ function fields_and_options()
                                         <img alt="img" class="banner-type-6__img" src="<?= $banner['image'] ?>">
                                         <div style="color: <?= $banner['desc_color'] ?>"
                                              class="banner-type-6__desc"><?= $banner['desc'] ?></div>
-                                        <a target="_blank" class="site-btn banner-type-6__btn <?= $btn_class_random ?>"
+                                        <a target="_blank" rel="noopener noreferrer" class="site-btn banner-type-6__btn <?= $btn_class_random ?>"
                                            href="<?= $banner['btn_link'] . get_params_string() ?>"><?= $banner['btn_text'] ?></a>
                                     </div>
                                 <? endif; ?>
@@ -1942,7 +1953,7 @@ function fields_and_options()
                                         <div style="color: <?= $banner['desc_color'] ?>"
                                              class="banner-type-7__desc"><?= $banner['desc'] ?></div>
                                         <? if (!empty($banner['btn_text'])): ?>
-                                            <a target="_blank" style="color: <?= $banner['btn_text_color'] ?>;"
+                                            <a target="_blank" style="color: <?= $banner['btn_text_color'] ?>;" rel="noopener noreferrer"
                                                class="banner-type-7__link"
                                                href="<?= $banner['btn_link'] . get_params_string() ?>"><?= $banner['btn_text'] ?></a>
                                         <? endif; ?>
@@ -2058,7 +2069,7 @@ function fields_and_options()
                                     <div class="slider-block__left-side">
                                         <div class="slider-block__title"><?= $slide['title'] ?></div>
                                         <div class="slider-block__desc"><?= $slide['desc'] ?> </div>
-                                        <a target="_blank" href="<?= $slide['btn_link'] . get_params_string() ?>"
+                                        <a target="_blank" rel="noopener noreferrer" href="<?= $slide['btn_link'] . get_params_string() ?>"
                                            class="site-btn slider-block__btn"><?= $slide['btn_text'] ?></a>
                                     </div>
                                     <div class="slider-block__right-side">
@@ -2161,7 +2172,7 @@ function fields_and_options()
                                         <div class="tabs-content__left-side">
                                             <div class="tabs-content__desc"><?= $tab['desc'] ?></div>
                                             <? if (!empty($tab['btn_text'])) { ?>
-                                                <a target="_blank" href="<?= $tab['btn_link'] ?>"
+                                                <a target="_blank" rel="noopener noreferrer" href="<?= $tab['btn_link'] ?>"
                                                    class="site-btn tabs-content__btn <?= $btn_class_in_tabs_random ?>"><?= $tab['btn_text'] ?></a>
                                             <? } ?>
                                         </div>
@@ -2261,7 +2272,7 @@ function fields_and_options()
                                                     <? if (!empty($tab['btn_text'])) { ?>
                                                         <a itemscope itemtype="https://schema.org/Action"
                                                            itemprop="potentialAction"
-                                                           itemref="target" target="_blank"
+                                                           itemref="target" target="_blank" rel="noopener noreferrer"
                                                            href="<?= $tab['btn_link'] . get_params_string() ?>"
                                                            class="site-btn tabs-content__btn <?= $btn_class_in_tabs_random ?>"><?= $tab['btn_text'] ?></a>
                                                         <meta itemprop="target"
@@ -2274,185 +2285,30 @@ function fields_and_options()
                                                     <? endif; ?>
                                                     <? if (!empty($tab['image'] and !empty($tab['image_after']))): ?>
 
-                                                        <style>
-                                                            .comparison-container {
-                                                                position: relative;
-                                                                overflow: hidden;
-                                                                border-radius: 15px;
-                                                                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-                                                                cursor: grab;
-                                                                user-select: none;
-
-                                                                display: flex;
-                                                                width: fit-content;
-                                                                flex-direction: row-reverse;
-                                                            }
-
-                                                            .comparison-container img {
-                                                                height: auto;
-                                                                object-fit: contain;
-                                                                pointer-events: none; /* Prevent image selection */
-                                                                width: auto;
-                                                            }
-
-                                                            /* Overlay Image */
-                                                            .comparison-top {
-                                                                clip-path: inset(0 50% 0 0);
-                                                                margin-left: -100%;
-                                                            }
-
-                                                            /* Draggable Handle */
-                                                            .slider-handle {
-                                                                position: absolute;
-                                                                display: flex;
-                                                                flex-direction: column;
-                                                                justify-content: center;
-                                                                align-items: center;
-                                                                box-sizing: border-box;
-                                                                height: 100%;
-                                                                top: 0;
-                                                                z-index: 5;
-
-                                                                transform: translateX(-50%);
-                                                            }
-                                                            .slider-handle__control-line {
-                                                                height: 50%;
-                                                                width: 2px;
-                                                                z-index: 6;
-                                                            }
-                                                            .slider-handle__control__circle {
-                                                                width: 50px;
-                                                                height: 50px;
-                                                                box-sizing: border-box;
-                                                                flex-shrink: 0;
-                                                                border-radius: 50%;
-                                                            }
-                                                            .slider-handle__theme-wrapper {
-                                                                width: 100%;
-                                                                height: 100%;
-                                                                display: flex;
-                                                                justify-content: space-between;
-                                                                align-items: center;
-                                                                position: absolute;
-                                                                z-index: 5;
-                                                            }
-                                                            .slider-handle__arrow-wrapper {
-                                                                display: flex;
-                                                                justify-content: center;
-                                                                align-items: center;
-                                                                transition: all 0.1s ease-out 0s;
-                                                            }
-                                                        </style>
-
-                                                        <div class="image-compare comparison-container">
-                                                            <img class="not-lazy comparison-top" loading="lazy" alt=""
-                                                                 src="<?= $tab['image'] ?> itemscope itemtype=" https://schema.org/ImageObject"">
-                                                            <img style="width:auto;" class="not-lazy" loading="lazy"
-                                                                 alt=""
-                                                                 src="<?= $tab['image_after'] ?> itemscope itemtype="
-                                                                 https://schema.org/ImageObject"">
-                                                            <div class="slider-handle" style="left: 50%">
-                                                                <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
-                                                                <div class="slider-handle__control__circle" style="backdrop-filter: blur(5px); border: 2px solid rgb(255, 255, 255);"></div>
-                                                                <div class="slider-handle__theme-wrapper">
-                                                                    <div class="slider-handle__arrow-wrapper" style="transform: translateX(5px);">
-                                                                        <svg height="15" width="15" style="transform: scale(0.7) rotateZ(180deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
-                                                                            <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
-                                                                        </svg>
-                                                                    </div>
-                                                                    <div class="slider-handle__arrow-wrapper" style="transform: translateX(-5px);">
-                                                                        <svg height="15" width="15" style="transform: scale(0.7); rotateZ(0deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
-                                                                            <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
-                                                                        </svg>
-                                                                    </div>
+                                                    <div class="image-compare comparison-container comparison-container-first">
+                                                        <img class="not-lazy comparison-top" loading="lazy" alt=""
+                                                             src="<?= $tab['image'] ?>">
+                                                        <img style="width:auto;" class="not-lazy" loading="lazy"
+                                                             alt=""
+                                                             src="<?= $tab['image_after'] ?>">
+                                                        <div class="slider-handle" style="left: 50%">
+                                                            <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
+                                                            <div class="slider-handle__control__circle" style="backdrop-filter: blur(5px); border: 2px solid rgb(255, 255, 255);"></div>
+                                                            <div class="slider-handle__theme-wrapper">
+                                                                <div class="slider-handle__arrow-wrapper" style="transform: translateX(5px);">
+                                                                    <svg height="15" width="15" style="transform: scale(0.7) rotateZ(180deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
+                                                                        <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
+                                                                    </svg>
                                                                 </div>
-                                                                <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
+                                                                <div class="slider-handle__arrow-wrapper" style="transform: translateX(-5px);">
+                                                                    <svg height="15" width="15" style="transform: scale(0.7); rotateZ(0deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
+                                                                        <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
+                                                                    </svg>
+                                                                </div>
                                                             </div>
+                                                            <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
                                                         </div>
-
-                                                        <script>
-                                                          function updateParentWidth() {
-                                                            const parents = document.querySelectorAll(".comparison-container");
-
-
-                                                            parents.forEach((parent) => {
-                                                              const child = parent.querySelector("img");
-
-                                                              if (child && parent) {
-                                                                parent.style.width = `${child.offsetWidth}px`;
-                                                              }
-                                                            });
-                                                          }
-
-                                                          // Run on load & on window resize
-                                                          window.addEventListener("load", updateParentWidth);
-                                                          window.addEventListener("resize", updateParentWidth);
-                                                          document.querySelectorAll(".comparison-container").forEach((container) => {
-                                                            const sliderHandle = container.querySelector(".slider-handle");
-                                                            const topImage = container.querySelector(".comparison-top");
-
-                                                            let isDragging = false;
-
-                                                            function updateSliderPosition(x) {
-                                                              let rect = container.getBoundingClientRect();
-                                                              let offsetX = x - rect.left;
-                                                              let percent = (offsetX / rect.width) * 100;
-                                                              percent = Math.max(0, Math.min(100, percent));
-
-                                                              topImage.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
-                                                              sliderHandle.style.left = `${percent}%`;
-                                                            }
-
-                                                            function onMouseMove(e) {
-                                                              if (isDragging) {
-                                                                updateSliderPosition(e.clientX);
-                                                              }
-                                                            }
-
-                                                            function onTouchMove(e) {
-                                                              if (isDragging) {
-                                                                updateSliderPosition(e.touches.item(0).clientX);
-                                                              }
-                                                            }
-
-                                                            function onMouseUp() {
-                                                              isDragging = false;
-                                                              document.body.style.cursor = "default";
-
-                                                              document.removeEventListener("mousemove", onMouseMove);
-                                                              document.removeEventListener("mouseup", onMouseUp);
-
-                                                              document.removeEventListener("touchmove", onTouchMove);
-                                                              document.removeEventListener("touchend", onMouseUp);
-                                                            }
-
-                                                            sliderHandle.addEventListener("mousedown", (e) => {
-                                                              e.preventDefault();
-                                                              isDragging = true;
-                                                              document.body.style.cursor = "grabbing";
-
-                                                              document.addEventListener("mousemove", onMouseMove);
-                                                              document.addEventListener("mouseup", onMouseUp);
-                                                            });
-
-                                                            sliderHandle.addEventListener("touchstart", (e) => {
-                                                              e.preventDefault();
-
-                                                              isDragging = true;
-                                                              document.body.style.cursor = "grabbing";
-
-                                                              document.addEventListener("touchmove", onTouchMove);
-                                                              document.addEventListener("touchend", onMouseUp);
-                                                            })
-
-                                                            // Click anywhere on the container to instantly move slider
-                                                            container.addEventListener("click", (e) => {
-                                                              if (e.target !== sliderHandle) {
-                                                                updateSliderPosition(e.clientX);
-                                                              }
-                                                            });
-                                                          });
-                                                        </script>
+                                                    </div>
                                                     <? endif; ?>
                                                 </div>
                                             </div>
@@ -2758,7 +2614,7 @@ function fields_and_options()
                                         <? if (!empty($background)): ?>
                                             style="background:<?= $background ?>"
                                         <? endif; ?>
-                                            target="_blank"
+                                            target="_blank" rel="noopener noreferrer"
                                             href="<?= $product['link'] . get_params_string() ?>"
                                             class="swiper-slide products-slider-block__slide">
                                         <img alt="img" class="products-slider-block__slide-logo"
@@ -2975,84 +2831,84 @@ function fields_and_options()
                         <div class="before-after__columns">
                             <div class="before-after__column-desc"><?= $description ?></div>
                             <? if (!empty($btn_text) and !empty($btn_link)): ?>
-                                <a href="<?= $btn_link ?>" target="_blank"
+                                <a href="<?= $btn_link ?>" target="_blank" rel="noopener noreferrer"
                                    class="site-btn before-after-content__btn"><?= $btn_text ?></a>
                             <? endif; ?>
                         </div>
                         <div class="before-after__content-wrapper">
                             <div class="image_compare-block"><? if (!empty($image_after) and !empty($image_before)): ?>
 
-                                    <style>
-                                        .comparison-container {
-                                            position: relative;
-                                            overflow: hidden;
-                                            border-radius: 15px;
-                                            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-                                            cursor: grab;
-                                            user-select: none;
+                                    <!--                                    <style>-->
+                                    <!--                                        .comparison-container {-->
+                                    <!--                                            position: relative;-->
+                                    <!--                                            overflow: hidden;-->
+                                    <!--                                            border-radius: 15px;-->
+                                    <!--                                            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);-->
+                                    <!--                                            cursor: grab;-->
+                                    <!--                                            user-select: none;-->
+                                    <!---->
+                                    <!--                                            display: flex;-->
+                                    <!--                                            width: fit-content;-->
+                                    <!--                                            flex-direction: row-reverse;-->
+                                    <!--                                        }-->
+                                    <!---->
+                                    <!--                                        .comparison-container img {-->
+                                    <!--                                            height: auto;-->
+                                    <!--                                            object-fit: contain;-->
+                                    <!--                                            pointer-events: none; /* Prevent image selection */-->
+                                    <!--                                            width: auto;-->
+                                    <!--                                        }-->
+                                    <!---->
+                                    <!--                                        /* Overlay Image */-->
+                                    <!--                                        .comparison-top {-->
+                                    <!--                                            clip-path: inset(0 50% 0 0);-->
+                                    <!--                                            margin-left: -100%;-->
+                                    <!--                                        }-->
+                                    <!---->
+                                    <!--                                        /* Draggable Handle */-->
+                                    <!--                                        .slider-handle {-->
+                                    <!--                                            position: absolute;-->
+                                    <!--                                            display: flex;-->
+                                    <!--                                            flex-direction: column;-->
+                                    <!--                                            justify-content: center;-->
+                                    <!--                                            align-items: center;-->
+                                    <!--                                            box-sizing: border-box;-->
+                                    <!--                                            height: 100%;-->
+                                    <!--                                            top: 0;-->
+                                    <!--                                            z-index: 5;-->
+                                    <!---->
+                                    <!--                                            transform: translateX(-50%);-->
+                                    <!--                                        }-->
+                                    <!--                                        .slider-handle__control-line {-->
+                                    <!--                                            height: 50%;-->
+                                    <!--                                            width: 2px;-->
+                                    <!--                                            z-index: 6;-->
+                                    <!--                                        }-->
+                                    <!--                                        .slider-handle__control__circle {-->
+                                    <!--                                            width: 50px;-->
+                                    <!--                                            height: 50px;-->
+                                    <!--                                            box-sizing: border-box;-->
+                                    <!--                                            flex-shrink: 0;-->
+                                    <!--                                            border-radius: 50%;-->
+                                    <!--                                        }-->
+                                    <!--                                        .slider-handle__theme-wrapper {-->
+                                    <!--                                            width: 100%;-->
+                                    <!--                                            height: 100%;-->
+                                    <!--                                            display: flex;-->
+                                    <!--                                            justify-content: space-between;-->
+                                    <!--                                            align-items: center;-->
+                                    <!--                                            position: absolute;-->
+                                    <!--                                            z-index: 5;-->
+                                    <!--                                        }-->
+                                    <!--                                        .slider-handle__arrow-wrapper {-->
+                                    <!--                                            display: flex;-->
+                                    <!--                                            justify-content: center;-->
+                                    <!--                                            align-items: center;-->
+                                    <!--                                            transition: all 0.1s ease-out 0s;-->
+                                    <!--                                        }-->
+                                    <!--                                    </style>-->
 
-                                            display: flex;
-                                            width: fit-content;
-                                            flex-direction: row-reverse;
-                                        }
-
-                                        .comparison-container img {
-                                            height: auto;
-                                            object-fit: contain;
-                                            pointer-events: none; /* Prevent image selection */
-                                            width: auto;
-                                        }
-
-                                        /* Overlay Image */
-                                        .comparison-top {
-                                            clip-path: inset(0 50% 0 0);
-                                            margin-left: -100%;
-                                        }
-
-                                        /* Draggable Handle */
-                                        .slider-handle {
-                                            position: absolute;
-                                            display: flex;
-                                            flex-direction: column;
-                                            justify-content: center;
-                                            align-items: center;
-                                            box-sizing: border-box;
-                                            height: 100%;
-                                            top: 0;
-                                            z-index: 5;
-
-                                            transform: translateX(-50%);
-                                        }
-                                        .slider-handle__control-line {
-                                            height: 50%;
-                                            width: 2px;
-                                            z-index: 6;
-                                        }
-                                        .slider-handle__control__circle {
-                                            width: 50px;
-                                            height: 50px;
-                                            box-sizing: border-box;
-                                            flex-shrink: 0;
-                                            border-radius: 50%;
-                                        }
-                                        .slider-handle__theme-wrapper {
-                                            width: 100%;
-                                            height: 100%;
-                                            display: flex;
-                                            justify-content: space-between;
-                                            align-items: center;
-                                            position: absolute;
-                                            z-index: 5;
-                                        }
-                                        .slider-handle__arrow-wrapper {
-                                            display: flex;
-                                            justify-content: center;
-                                            align-items: center;
-                                            transition: all 0.1s ease-out 0s;
-                                        }
-                                    </style>
-
-                                    <div class="image-compare comparison-container">
+                                    <div class="image-compare comparison-container comparison-container-second">
                                         <? if (!empty($image_after)): ?>
                                             <? $image_after = ImageResizeWordPress::resizeWidthWebp($image_after, 1450) ?>
                                             <img loading="lazy" width="1050" height="700" alt="img"
@@ -3081,90 +2937,6 @@ function fields_and_options()
                                             <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
                                         </div>
                                     </div>
-
-                                    <script>
-                                      function updateParentWidth() {
-                                        const parents = document.querySelectorAll(".comparison-container");
-
-
-                                        parents.forEach((parent) => {
-                                          const child = parent.querySelector("img");
-
-                                          if (child && parent) {
-                                            parent.style.width = `${child.offsetWidth}px`;
-                                          }
-                                        });
-                                      }
-
-                                      // Run on load & on window resize
-                                      window.addEventListener("load", updateParentWidth);
-                                      window.addEventListener("resize", updateParentWidth);
-                                      document.querySelectorAll(".comparison-container").forEach((container) => {
-                                        const sliderHandle = container.querySelector(".slider-handle");
-                                        const topImage = container.querySelector(".comparison-top");
-
-                                        let isDragging = false;
-
-                                        function updateSliderPosition(x) {
-                                          let rect = container.getBoundingClientRect();
-                                          let offsetX = x - rect.left;
-                                          let percent = (offsetX / rect.width) * 100;
-                                          percent = Math.max(0, Math.min(100, percent));
-
-                                          topImage.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
-                                          sliderHandle.style.left = `${percent}%`;
-                                        }
-
-                                        function onMouseMove(e) {
-                                          if (isDragging) {
-                                            updateSliderPosition(e.clientX);
-                                          }
-                                        }
-
-                                        function onTouchMove(e) {
-                                          if (isDragging) {
-                                            updateSliderPosition(e.touches.item(0).clientX);
-                                          }
-                                        }
-
-                                        function onMouseUp() {
-                                          isDragging = false;
-                                          document.body.style.cursor = "default";
-
-                                          document.removeEventListener("mousemove", onMouseMove);
-                                          document.removeEventListener("mouseup", onMouseUp);
-
-                                          document.removeEventListener("touchmove", onTouchMove);
-                                          document.removeEventListener("touchend", onMouseUp);
-                                        }
-
-                                        sliderHandle.addEventListener("mousedown", (e) => {
-                                          e.preventDefault();
-                                          isDragging = true;
-                                          document.body.style.cursor = "grabbing";
-
-                                          document.addEventListener("mousemove", onMouseMove);
-                                          document.addEventListener("mouseup", onMouseUp);
-                                        });
-
-                                        sliderHandle.addEventListener("touchstart", (e) => {
-                                          e.preventDefault();
-
-                                          isDragging = true;
-                                          document.body.style.cursor = "grabbing";
-
-                                          document.addEventListener("touchmove", onTouchMove);
-                                          document.addEventListener("touchend", onMouseUp);
-                                        })
-
-                                        // Click anywhere on the container to instantly move slider
-                                        container.addEventListener("click", (e) => {
-                                          if (e.target !== sliderHandle) {
-                                            updateSliderPosition(e.clientX);
-                                          }
-                                        });
-                                      });
-                                    </script>
                                 <? endif; ?>
                                 <div class="bottom-left"><?= $before_text ?></div>
                                 <div class="bottom-right"><?= $after_text ?></div>
@@ -3244,7 +3016,7 @@ function fields_and_options()
                                                      itemprop="description"><?= $fields['left-desc1'] ?></div>
                                                 <aitemscope
                                                 ="" itemtype="https://schema.org/Action" itemprop="potentialAction"
-                                                itemref="target" target="_blank" href="<?= $fields['chess-btn_link'] ?>"
+                                                itemref="target" target="_blank" rel="noopener noreferrer" href="<?= $fields['chess-btn_link'] ?>"
                                                 class="site-btn chess-content__btn"><?= $fields['chess-btn_text'] ?></a>
                                             </div>
                                             <div class="chess-content-right-size" itemscope
@@ -3263,7 +3035,7 @@ function fields_and_options()
                                                 <div class="chess-content__desc"
                                                      itemprop="description"><?= $fields['right-desc1'] ?></div>
                                                 <a itemscope="" itemtype="https://schema.org/Action"
-                                                   itemprop="potentialAction" itemref="target" target="_blank"
+                                                   itemprop="potentialAction" itemref="target" target="_blank" rel="noopener noreferrer"
                                                    href="<?= $fields['chess-btn_link'] ?>"
                                                    class="site-btn chess-content__btn"><?= $fields['chess-btn_text'] ?></a>
                                             </div>
@@ -3275,7 +3047,7 @@ function fields_and_options()
                                                 <div class="chess-content__desc"
                                                      itemprop="description"><?= $fields['left-desc2'] ?></div>
                                                 <a itemscope="" itemtype="https://schema.org/Action"
-                                                   itemprop="potentialAction" itemref="target" target="_blank"
+                                                   itemprop="potentialAction" itemref="target" target="_blank" rel="noopener noreferrer"
                                                    href="<?= $fields['chess-btn_link'] ?>"
                                                    class="site-btn chess-content__btn"><?= $fields['chess-btn_text'] ?></a>
                                             </div>
@@ -3295,7 +3067,7 @@ function fields_and_options()
                                                 <div class="chess-content__desc"
                                                      itemprop="description"><?= $fields['right-desc2'] ?></div>
                                                 <a itemscope="" itemtype="https://schema.org/Action"
-                                                   itemprop="potentialAction" itemref="target" target="_blank"
+                                                   itemprop="potentialAction" itemref="target" target="_blank" rel="noopener noreferrer"
                                                    href="<?= $fields['chess-btn_link'] ?>"
                                                    class="site-btn chess-content__btn"><?= $fields['chess-btn_text'] ?></a>
                                             </div>
@@ -3439,7 +3211,7 @@ function fields_and_options()
                                 <div class="resources-grid-wrapper">
                                     <? foreach ($tools as $tool): ?>
                                         <div class="tools_list_item">
-                                            <a href="<?= $tool['link'] ?>" target="_blank"
+                                            <a href="<?= $tool['link'] ?>" target="_blank" rel="noopener noreferrer"
                                                class="resource-tile-container">
                                                 <img class="resource-image" src="<?= $tool['image'] ?>"/>
                                                 <div class="resource-tile-bottom">
@@ -3611,192 +3383,37 @@ function fields_and_options()
                                         <div class="swiper-slide" itemtype="https://schema.org/Product">
                                             <div class="gallery-block__content-wrapper">
                                                 <? if (!empty($image_after) and !empty($image_before)): ?>
-
-                                                    <style>
-                                                        .comparison-container {
-                                                            position: relative;
-                                                            overflow: hidden;
-                                                            border-radius: 15px;
-                                                            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-                                                            cursor: grab;
-                                                            user-select: none;
-
-                                                            display: flex;
-                                                            width: fit-content;
-                                                            flex-direction: row-reverse;
-                                                        }
-
-                                                        .comparison-container img {
-                                                            height: auto;
-                                                            object-fit: contain;
-                                                            pointer-events: none; /* Prevent image selection */
-                                                            width: auto;
-                                                        }
-
-                                                        /* Overlay Image */
-                                                        .comparison-top {
-                                                            clip-path: inset(0 50% 0 0);
-                                                            margin-left: -100%;
-                                                        }
-
-                                                        /* Draggable Handle */
-                                                        .slider-handle {
-                                                            position: absolute;
-                                                            display: flex;
-                                                            flex-direction: column;
-                                                            justify-content: center;
-                                                            align-items: center;
-                                                            box-sizing: border-box;
-                                                            height: 100%;
-                                                            top: 0;
-                                                            z-index: 5;
-
-                                                            transform: translateX(-50%);
-                                                        }
-                                                        .slider-handle__control-line {
-                                                            height: 50%;
-                                                            width: 2px;
-                                                            z-index: 6;
-                                                        }
-                                                        .slider-handle__control__circle {
-                                                            width: 50px;
-                                                            height: 50px;
-                                                            box-sizing: border-box;
-                                                            flex-shrink: 0;
-                                                            border-radius: 50%;
-                                                        }
-                                                        .slider-handle__theme-wrapper {
-                                                            width: 100%;
-                                                            height: 100%;
-                                                            display: flex;
-                                                            justify-content: space-between;
-                                                            align-items: center;
-                                                            position: absolute;
-                                                            z-index: 5;
-                                                        }
-                                                        .slider-handle__arrow-wrapper {
-                                                            display: flex;
-                                                            justify-content: center;
-                                                            align-items: center;
-                                                            transition: all 0.1s ease-out 0s;
-                                                        }
-                                                    </style>
-
-                                                    <div class="image-compare comparison-container">
-                                                        <? if (!empty($image_after)): ?>
-                                                            <? $image_after = ImageResizeWordPress::resizeWidthWebp($image_after, 1450) ?>
-                                                            <img loading="lazy" width="1050" height="700" alt="img"
-                                                                 class="gallery-block__img comparison-top not-lazy"
-                                                                 src="<?= $image_after ?>">
-                                                        <? endif; ?>
-                                                        <? if (!empty($image_before)): ?>
-                                                            <? $image_before = ImageResizeWordPress::resizeWidthWebp($image_before, 1450) ?>
-                                                            <img loading="lazy" width="1050" height="700" alt="img"
-                                                                 class="gallery-block__img not-lazy"
-                                                                 src="<?= $image_before ?>">
-                                                        <? endif; ?>
-                                                        <div class="slider-handle" style="left: 50%">
-                                                            <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
-                                                            <div class="slider-handle__control__circle" style="backdrop-filter: blur(5px); border: 2px solid rgb(255, 255, 255);"></div>
-                                                            <div class="slider-handle__theme-wrapper">
-                                                                <div class="slider-handle__arrow-wrapper" style="transform: translateX(5px);">
-                                                                    <svg height="15" width="15" style="transform: scale(0.7) rotateZ(180deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
-                                                                        <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
-                                                                    </svg>
-                                                                </div>
-                                                                <div class="slider-handle__arrow-wrapper" style="transform: translateX(-5px);">
-                                                                    <svg height="15" width="15" style="transform: scale(0.7); rotateZ(0deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
-                                                                        <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
-                                                                    </svg>
-                                                                </div>
+                                                <div class="image-compare comparison-container comparison-container-third">
+                                                    <? if (!empty($image_after)): ?>
+                                                        <? $image_after = ImageResizeWordPress::resizeWidthWebp($image_after, 1450) ?>
+                                                        <img loading="lazy" width="1050" height="700" alt="img"
+                                                             class="gallery-block__img comparison-top not-lazy"
+                                                             src="<?= $image_after ?>">
+                                                    <? endif; ?>
+                                                    <? if (!empty($image_before)): ?>
+                                                        <? $image_before = ImageResizeWordPress::resizeWidthWebp($image_before, 1450) ?>
+                                                        <img loading="lazy" width="1050" height="700" alt="img"
+                                                             class="gallery-block__img not-lazy"
+                                                             src="<?= $image_before ?>">
+                                                    <? endif; ?>
+                                                    <div class="slider-handle" style="left: 50%">
+                                                        <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
+                                                        <div class="slider-handle__control__circle" style="backdrop-filter: blur(5px); border: 2px solid rgb(255, 255, 255);"></div>
+                                                        <div class="slider-handle__theme-wrapper">
+                                                            <div class="slider-handle__arrow-wrapper" style="transform: translateX(5px);">
+                                                                <svg height="15" width="15" style="transform: scale(0.7) rotateZ(180deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
+                                                                    <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
+                                                                </svg>
                                                             </div>
-                                                            <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
+                                                            <div class="slider-handle__arrow-wrapper" style="transform: translateX(-5px);">
+                                                                <svg height="15" width="15" style="transform: scale(0.7); rotateZ(0deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
+                                                                    <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
+                                                                </svg>
+                                                            </div>
                                                         </div>
+                                                        <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
                                                     </div>
-
-                                                    <script>
-                                                      function updateParentWidth() {
-                                                        const parents = document.querySelectorAll(".comparison-container");
-
-
-                                                        parents.forEach((parent) => {
-                                                          const child = parent.querySelector("img");
-
-                                                          if (child && parent) {
-                                                            parent.style.width = `${child.offsetWidth}px`;
-                                                          }
-                                                        });
-                                                      }
-
-                                                      // Run on load & on window resize
-                                                      window.addEventListener("load", updateParentWidth);
-                                                      window.addEventListener("resize", updateParentWidth);
-                                                      document.querySelectorAll(".comparison-container").forEach((container) => {
-                                                        const sliderHandle = container.querySelector(".slider-handle");
-                                                        const topImage = container.querySelector(".comparison-top");
-
-                                                        let isDragging = false;
-
-                                                        function updateSliderPosition(x) {
-                                                          let rect = container.getBoundingClientRect();
-                                                          let offsetX = x - rect.left;
-                                                          let percent = (offsetX / rect.width) * 100;
-                                                          percent = Math.max(0, Math.min(100, percent));
-
-                                                          topImage.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
-                                                          sliderHandle.style.left = `${percent}%`;
-                                                        }
-
-                                                        function onMouseMove(e) {
-                                                          if (isDragging) {
-                                                            updateSliderPosition(e.clientX);
-                                                          }
-                                                        }
-
-                                                        function onTouchMove(e) {
-                                                          if (isDragging) {
-                                                            updateSliderPosition(e.touches.item(0).clientX);
-                                                          }
-                                                        }
-
-                                                        function onMouseUp() {
-                                                          isDragging = false;
-                                                          document.body.style.cursor = "default";
-
-                                                          document.removeEventListener("mousemove", onMouseMove);
-                                                          document.removeEventListener("mouseup", onMouseUp);
-
-                                                          document.removeEventListener("touchmove", onTouchMove);
-                                                          document.removeEventListener("touchend", onMouseUp);
-                                                        }
-
-                                                        sliderHandle.addEventListener("mousedown", (e) => {
-                                                          e.preventDefault();
-                                                          isDragging = true;
-                                                          document.body.style.cursor = "grabbing";
-
-                                                          document.addEventListener("mousemove", onMouseMove);
-                                                          document.addEventListener("mouseup", onMouseUp);
-                                                        });
-
-                                                        sliderHandle.addEventListener("touchstart", (e) => {
-                                                          e.preventDefault();
-
-                                                          isDragging = true;
-                                                          document.body.style.cursor = "grabbing";
-
-                                                          document.addEventListener("touchmove", onTouchMove);
-                                                          document.addEventListener("touchend", onMouseUp);
-                                                        })
-
-                                                        // Click anywhere on the container to instantly move slider
-                                                        container.addEventListener("click", (e) => {
-                                                          if (e.target !== sliderHandle) {
-                                                            updateSliderPosition(e.clientX);
-                                                          }
-                                                        });
-                                                      });
-                                                    </script>
+                                                </div>
                                                 <? endif; ?>
                                             </div>
 
@@ -3807,7 +3424,7 @@ function fields_and_options()
                                             <? if (!empty($btn_text) and !empty($btn_link)): ?>
                                                 <a itemscope="" itemtype="https://schema.org/Action"
                                                    itemprop="potentialAction" itemref="target" href="<?= $btn_link ?>"
-                                                   target="_blank"
+                                                   target="_blank" rel="noopener noreferrer"
                                                    class="site-btn content-tabs-content__btn <?= $tab_btn_add_class ?>"><?= $btn_text ?></a>
                                             <? endif; ?>
                                         </div>
@@ -3948,26 +3565,26 @@ function fields_and_options()
 
 
                                                 <?php if (!empty($dataNews)): ?>
-                                                    <div class="tab  swiper-slide mw360" data-filter="<?= $dataNews ?>">
-                                                        <div class="page__blog--item__content media__blog--item blog__block p32"
-                                                             style="background: url('<?= $blog_image ?>') center no-repeat; background-size: cover;">
-                                                            <div>
-                                                                <div class="page__blog--news__date">
-                                                                    <div class="card__tag-while"><?= the_category(); ?></div>
-                                                                    <p class="page__blog--new__date"><?= get_the_date('F j, Y'); ?></p>
-                                                                </div>
-                                                                <h2 class="page__blog--item__title"><?= the_title(); ?></h2>
+                                                <div class="tab  swiper-slide mw360" data-filter="<?= $dataNews ?>">
+                                                    <div class="page__blog--item__content media__blog--item blog__block p32"
+                                                         style="background: url('<?= $blog_image ?>') center no-repeat; background-size: cover;">
+                                                        <div>
+                                                            <div class="page__blog--news__date">
+                                                                <div class="card__tag-while"><?= the_category(); ?></div>
+                                                                <p class="page__blog--new__date"><?= get_the_date('F j, Y'); ?></p>
                                                             </div>
-                                                            <div>
-                                                                <div class="page__blog--item__subtitle"><?= get_short_desk(80); ?></div>
-                                                                <a href="<?= get_permalink() ?>"
-                                                                   class="page__blog--news__btn"><span
-                                                                            class="page__blog--news__btn-inf-url"><?= the_title(); ?></span><?= $read_more_label ?>
-                                                                </a>
-                                                            </div>
+                                                            <h2 class="page__blog--item__title"><?= the_title(); ?></h2>
+                                                        </div>
+                                                        <div>
+                                                            <div class="page__blog--item__subtitle"><?= get_short_desk(80); ?></div>
+                                                            <a href="<?= get_permalink() ?>"
+                                                               class="page__blog--news__btn"><span
+                                                                        class="page__blog--news__btn-inf-url"><?= the_title(); ?></span><?= $read_more_label ?>
+                                                            </a>
                                                         </div>
                                                     </div>
-                                                <? endif; ?>
+                                                </div>
+                                            <? endif; ?>
                                             <?php endwhile; ?>
                                             <?php wp_reset_postdata(); ?>
                                         <?php endif; ?>
@@ -4113,7 +3730,7 @@ function fields_and_options()
                         <img alt="img" src="<?= $fields['team_section_bubble_image_7']; ?>" class="team__img--abs">
                         <div class="site-section__title team-section__title site-section__title--centered"><?= $fields['team_section_title'] ?></div>
                         <div class="site-section__desc team-section__desc site-section__desc--centered"><?= $fields['team_section_desc'] ?></div>
-                        <a target="_blank" href="<?= $fields['team_section_btn_link'] . get_params_string() ?>"
+                        <a target="_blank" rel="noopener noreferrer" href="<?= $fields['team_section_btn_link'] . get_params_string() ?>"
                            class="site-btn team-section__btn mb160"><?= $fields['team_section_btn_text'] ?></a>
                     </div>
                     <div class="block team-section__slider swiper-container">
@@ -4233,7 +3850,7 @@ function fields_and_options()
 
                   setTimeout(() => {
                     modal.classList.add('popup_show');
-                  }, 15000);
+                  }, 250);
                 });
 
                 modalCloseButton.addEventListener('click', () => {
@@ -4969,7 +4586,7 @@ function fields_and_options()
                                                      class="gallery-block__description"><?= $gallery_block_description ?></div>
                                             <? endif; ?>
                                             <? if (!empty($gallery_block_btn_text) and !empty($gallery_block_btn_link)): ?>
-                                                <a target="_blank"
+                                                <a target="_blank" rel="noopener noreferrer"
                                                    href="<?= $gallery_block_btn_link . get_params_string() ?>"
                                                    class="site-btn gallery-block__btn <?= $btn_class_random ?>"><?= $gallery_block_btn_text ?></a>
                                             <? endif; ?>
@@ -5179,7 +4796,7 @@ function fields_and_options()
                             </div>
                         </div>
                     </div>
-                    <a target="_blank" class="site-btn irtc-block__btn"
+                    <a target="_blank" rel="noopener noreferrer" class="site-btn irtc-block__btn"
                        href="<?= $irtc_btn_link ?>"><?= $irtc_btn_text ?></a>
                 </div>
             </div>

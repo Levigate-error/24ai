@@ -1,15 +1,15 @@
 .footer_tags {
     display: flex;
-width: 100%;
-align-items: flex-start;
-align-content: flex-start;
-gap: 8px;
-flex-wrap: wrap;
-border-bottom: 1px solid #525252;
-  /*  margin-bottom: 105px;*/
+    width: 100%;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 8px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #525252;
+    /*  margin-bottom: 105px;*/
     margin-left: 0px;
     margin-right: 0px;
-    padding: 0 35px 105px 35px;
+    padding: 35px;
 }
 
 .footer_tag-link {

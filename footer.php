@@ -208,26 +208,19 @@ for ($i = 1; $i <= 20; $i++) {
 
     </nav>
     <div class="footer_desktop">
-
-
-
-
-
-
         <div class="footer_wrapper">
+            <div class="footer_tags">
 
-            <!--            <div class="footer_tags">-->
-            <!---->
-            <!--                --><?php //if ($footer_tags) : ?>
-            <!--                    --><?php //foreach ($footer_tags as $tag): ?>
-            <!--                        <div class="footer_tag">-->
-            <!--                            <a href="--><?php //= $tag['tag_link']; ?><!--" class="footer_tag-link">-->
-            <!--                                <p class="footer_tag-title">--><?php //= $tag['tag_title']; ?><!--</p>-->
-            <!--                            </a>-->
-            <!--                        </div>-->
-            <!--                    --><?php //endforeach; ?>
-            <!--                --><?php //endif; ?>
-            <!--            </div>-->
+                <?php if ($footer_tags) : ?>
+                    <?php foreach ($footer_tags as $tag): ?>
+                        <div class="footer_tag">
+                            <a href="<?= $tag['tag_link']; ?>" class="footer_tag-link">
+                                <p class="footer_tag-title"><?= $tag['tag_title']; ?></p>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
 
             <!--    <div class="footer_row">
                 <?php //if (!empty($footer_contacts)): ?>
@@ -255,7 +248,7 @@ for ($i = 1; $i <= 20; $i++) {
             <?php if (!empty($footer_documents)): ?>
                 <div class="footer_documents">
                     <?php foreach ($footer_documents as $footer_document): ?>
-                        <a target="_blank" href="<?= $footer_document['document_link'] ?>">
+                        <a target="_blank" rel="noopener noreferrer" href="<?= $footer_document['document_link'] ?>">
                             <p><?= $footer_document['document_title'] ?></p>
                         </a>
                     <?php endforeach; ?>
@@ -265,7 +258,7 @@ for ($i = 1; $i <= 20; $i++) {
             <?php if (!empty($footer_social_menu)): ?>
                 <div class="footer_socials">
                     <?php foreach ($footer_social_menu as $menu_item): ?>
-                        <a target="_blank" href="<?= $menu_item['item_link'] ?>">
+                        <a target="_blank" rel="noopener noreferrer" href="<?= $menu_item['item_link'] ?>">
                             <img src="<?= $menu_item['item_image'] ?>" alt="#">
                         </a>
                     <?php endforeach; ?>
@@ -310,7 +303,7 @@ for ($i = 1; $i <= 20; $i++) {
                 <?php if (!empty($footer_social_menu)): ?>
                     <div class="footer_socials">
                         <?php foreach ($footer_social_menu as $menu_item): ?>
-                            <a target="_blank" href="<?= $menu_item['item_link'] ?>">
+                            <a target="_blank" rel="noopener noreferrer" href="<?= $menu_item['item_link'] ?>">
                                 <img src="<?= $menu_item['item_image'] ?>" alt="#">
                             </a>
                         <?php endforeach; ?>
@@ -321,7 +314,7 @@ for ($i = 1; $i <= 20; $i++) {
         <?php if (!empty($footer_documents)): ?>
             <div class="footer_documents">
                 <?php foreach ($footer_documents as $footer_document): ?>
-                    <a target="_blank" href="<?= $footer_document['document_link'] ?>">
+                    <a target="_blank" rel="noopener noreferrer" href="<?= $footer_document['document_link'] ?>">
                         <p><?= $footer_document['document_title'] ?></p>
                     </a>
                 <?php endforeach; ?>
@@ -364,7 +357,7 @@ for ($i = 1; $i <= 20; $i++) {
             <input type="hidden" name="type-request" value="Заявка">
             <input type="hidden" name="action" value="contact_form">
 
-            <div class="contact-form-block_policy contact-form-block_policy_modal" id="form2_checkbox"><input class="contact-form-block_policy_checkbox contact-form-block_policy_checkbox_modal" type="checkbox" checked="checked" name="form_checkbox" aria-labelledby="form2_checkbox"> By clicking button, you agree to our Terms. Learn how we collect, use and share your data in our <a href="/Privacy Policy for 24TTL.pdf" target="_blank">Privacy Policy</a></div>
+            <div class="contact-form-block_policy contact-form-block_policy_modal" id="form2_checkbox"><input class="contact-form-block_policy_checkbox contact-form-block_policy_checkbox_modal" type="checkbox" checked="checked" name="form_checkbox" aria-labelledby="form2_checkbox"> By clicking button, you agree to our Terms. Learn how we collect, use and share your data in our <a href="/ru/Privacy Policy for 24TTL.pdf" target="_blank" rel="noopener noreferrer">Privacy Policy</a></div>
             <button class="site-btn modal-form-block__form-btn" type="submit">Request Demo</button>
             <div class="modal-form-block__form-status"></div>
         </form>

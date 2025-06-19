@@ -32,5 +32,4 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollval = window.scrollY;
     });
     document.getElementById("year").innerHTML = new Date().getFullYear();
-
 });

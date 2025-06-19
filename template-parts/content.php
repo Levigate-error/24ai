@@ -11,12 +11,12 @@
     <article  <?php post_class(); ?>>
         <div class="post-wrap">
             <div class="container">
-
-                <div class="blog-breadcrumb"><?php if (function_exists('the_breadcrumb')) the_breadcrumb(); ?></div>
+                
+        <div class="blog-breadcrumb"><?php if (function_exists('the_breadcrumb')) the_breadcrumb(); ?></div>
                 <div class="post_header">
                     <? if(!empty(carbon_get_post_meta( get_the_ID(), 'header_logo' ))): ?>
-                        <img src="<?php echo carbon_get_post_meta( get_the_ID(), 'header_logo' ); ?>" alt="img" class="">
-                    <? endif; ?>
+                    <img src="<?php echo carbon_get_post_meta( get_the_ID(), 'header_logo' ); ?>" alt="img" class="">
+                 <? endif; ?>           
                     <p class="post_header-text"><?php echo carbon_get_post_meta( get_the_ID(), 'header_text' ); ?></p>
                     <a class="post_header-button site-btn" href="<?php echo carbon_get_post_meta( get_the_ID(), 'header_url' ); ?>" style="background: <?php echo carbon_get_post_meta( get_the_ID(), 'header_button_color' ); ?>">
                         <?php echo carbon_get_post_meta( get_the_ID(), 'header_button' ); ?>
@@ -29,7 +29,7 @@
                             <div class="page__blog--news__date post__date">
                                 <div class="post__cat m0"><?= the_category();?></div>
                                 <p class="page__blog--new__date black"><?= get_the_date('F j, Y');?></p>
-                            </div>
+</div>
                             <h1 class="page__blog--news__title text-black text-left"><?=the_title();?></h1>
                             <div class="post__caption--tags">
                                 <div class="tag__title"><?=the_tags();?></div>
@@ -84,11 +84,11 @@
                             <?= the_content(); ?>
                             <?php if (!empty(get_post_meta( get_the_ID(), 'custom_author', true ))): ?>
                                 <?php
-                                $author_id = get_post_meta(get_the_ID(), 'custom_author', true);
-                                $author_link = get_permalink($author_id);
-                                $author_name = get_the_title($author_id);
-                                $author_subtitle = get_field('author_subtitle', $author_id);
-                                $author_photo = get_field('author_photo', $author_id);
+                                    $author_id = get_post_meta(get_the_ID(), 'custom_author', true);
+                                    $author_link = get_permalink($author_id);
+                                    $author_name = get_the_title($author_id);
+                                    $author_subtitle = get_field('author_subtitle', $author_id);
+                                    $author_photo = get_field('author_photo', $author_id);
                                 ?>
                                 <a class="post_author" href="<?= $author_link ?>">
                                     <img src="<?= $author_photo ?>" alt="post-author-photo"/>
@@ -147,7 +147,7 @@
                     <div class="post__sidebar">
                         <?php get_template_part("template-parts/sidebar_post"); ?>
                     </div>
-
+                                                        
                 </div>
             </div>
 

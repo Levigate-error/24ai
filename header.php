@@ -71,7 +71,6 @@ function callback($buffer)
 
         <!-- Google Tag Manager -->
         <script>
-          setTimeout(function () {
             (function (w, d, s, l, i) {
               w[l] = w[l] || [];
               w[l].push({
@@ -85,10 +84,257 @@ function callback($buffer)
                 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
               f.parentNode.insertBefore(j, f);
             })(window, document, 'script', 'dataLayer', 'GTM-KWNTV9F');
-          }, 2000)
+
+            document.addEventListener("DOMContentLoaded", function () {
+              function updateParentWidth() {
+                const parents = document.querySelectorAll(".comparison-container.comparison-container-first");
+
+
+                parents.forEach((parent) => {
+                  const child = parent.querySelector("img");
+
+                  if (child && parent) {
+                    parent.style.width = `${child.offsetWidth || 1032}px`;
+                  }
+                });
+              }
+
+              // Run on load & on window resize
+              window.addEventListener("load", updateParentWidth);
+              window.addEventListener("resize", updateParentWidth);
+              document.querySelectorAll(".comparison-container.comparison-container-first").forEach((container) => {
+                const sliderHandle = container.querySelector(".slider-handle");
+                const topImage = container.querySelector(".comparison-top");
+
+                let isDragging = false;
+
+                function updateSliderPosition(x) {
+                  let rect = container.getBoundingClientRect();
+                  let offsetX = x - rect.left;
+                  let percent = (offsetX / rect.width) * 100;
+                  percent = Math.max(0, Math.min(100, percent));
+
+                  topImage.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+                  sliderHandle.style.left = `${percent}%`;
+                }
+
+                function onMouseMove(e) {
+                  if (isDragging) {
+                    updateSliderPosition(e.clientX);
+                  }
+                }
+
+                function onTouchMove(e) {
+                  if (isDragging) {
+                    updateSliderPosition(e.touches.item(0).clientX);
+                  }
+                }
+
+                function onMouseUp() {
+                  isDragging = false;
+                  document.body.style.cursor = "default";
+
+                  document.removeEventListener("mousemove", onMouseMove);
+                  document.removeEventListener("mouseup", onMouseUp);
+
+                  document.removeEventListener("touchmove", onTouchMove);
+                  document.removeEventListener("touchend", onMouseUp);
+                }
+
+                sliderHandle.addEventListener("mousedown", (e) => {
+                  e.preventDefault();
+                  isDragging = true;
+                  document.body.style.cursor = "grabbing";
+
+                  document.addEventListener("mousemove", onMouseMove);
+                  document.addEventListener("mouseup", onMouseUp);
+                });
+
+                sliderHandle.addEventListener("touchstart", (e) => {
+                  e.preventDefault();
+
+                  isDragging = true;
+                  document.body.style.cursor = "grabbing";
+
+                  document.addEventListener("touchmove", onTouchMove);
+                  document.addEventListener("touchend", onMouseUp);
+                })
+
+                // Click anywhere on the container to instantly move slider
+                container.addEventListener("click", (e) => {
+                  if (e.target !== sliderHandle) {
+                    updateSliderPosition(e.clientX);
+                  }
+                });
+              });
+              function updateParentWidth() {
+                const parents = document.querySelectorAll(".comparison-container.comparison-container-second");
+
+
+                parents.forEach((parent) => {
+                  const child = parent.querySelector("img");
+
+                  if (child && parent) {
+                    console.log(parent, child.offsetWidth, "hmm2")
+                    parent.style.width = `${child.offsetWidth || 450}px`;
+                  }
+                });
+              }
+
+              // Run on load & on window resize
+              window.addEventListener("load", updateParentWidth);
+              window.addEventListener("resize", updateParentWidth);
+              document.querySelectorAll(".comparison-container.comparison-container-second").forEach((container) => {
+                const sliderHandle = container.querySelector(".slider-handle");
+                const topImage = container.querySelector(".comparison-top");
+
+                let isDragging = false;
+
+                function updateSliderPosition(x) {
+                  let rect = container.getBoundingClientRect();
+                  let offsetX = x - rect.left;
+                  let percent = (offsetX / rect.width) * 100;
+                  percent = Math.max(0, Math.min(100, percent));
+
+                  topImage.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+                  sliderHandle.style.left = `${percent}%`;
+                }
+
+                function onMouseMove(e) {
+                  if (isDragging) {
+                    updateSliderPosition(e.clientX);
+                  }
+                }
+
+                function onTouchMove(e) {
+                  if (isDragging) {
+                    updateSliderPosition(e.touches.item(0).clientX);
+                  }
+                }
+
+                function onMouseUp() {
+                  isDragging = false;
+                  document.body.style.cursor = "default";
+
+                  document.removeEventListener("mousemove", onMouseMove);
+                  document.removeEventListener("mouseup", onMouseUp);
+
+                  document.removeEventListener("touchmove", onTouchMove);
+                  document.removeEventListener("touchend", onMouseUp);
+                }
+
+                sliderHandle.addEventListener("mousedown", (e) => {
+                  e.preventDefault();
+                  isDragging = true;
+                  document.body.style.cursor = "grabbing";
+
+                  document.addEventListener("mousemove", onMouseMove);
+                  document.addEventListener("mouseup", onMouseUp);
+                });
+
+                sliderHandle.addEventListener("touchstart", (e) => {
+                  e.preventDefault();
+
+                  isDragging = true;
+                  document.body.style.cursor = "grabbing";
+
+                  document.addEventListener("touchmove", onTouchMove);
+                  document.addEventListener("touchend", onMouseUp);
+                })
+
+                // Click anywhere on the container to instantly move slider
+                container.addEventListener("click", (e) => {
+                  if (e.target !== sliderHandle) {
+                    updateSliderPosition(e.clientX);
+                  }
+                });
+              });
+
+              function updateParentWidth() {
+                const parents = document.querySelectorAll(".comparison-container.comparison-container-third");
+
+
+                parents.forEach((parent) => {
+                  const child = parent.querySelector("img");
+
+                  if (child && parent) {
+                    console.log(parent, child.offsetWidth, "hmm3")
+                    parent.style.width = `${child.offsetWidth || 450}px`;
+                  }
+                });
+              }
+
+              // Run on load & on window resize
+              window.addEventListener("load", updateParentWidth);
+              window.addEventListener("resize", updateParentWidth);
+              document.querySelectorAll(".comparison-container.comparison-container-third").forEach((container) => {
+                const sliderHandle = container.querySelector(".slider-handle");
+                const topImage = container.querySelector(".comparison-top");
+
+                let isDragging = false;
+
+                function updateSliderPosition(x) {
+                  let rect = container.getBoundingClientRect();
+                  let offsetX = x - rect.left;
+                  let percent = (offsetX / rect.width) * 100;
+                  percent = Math.max(0, Math.min(100, percent));
+
+                  topImage.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+                  sliderHandle.style.left = `${percent}%`;
+                }
+
+                function onMouseMove(e) {
+                  if (isDragging) {
+                    updateSliderPosition(e.clientX);
+                  }
+                }
+
+                function onTouchMove(e) {
+                  if (isDragging) {
+                    updateSliderPosition(e.touches.item(0).clientX);
+                  }
+                }
+
+                function onMouseUp() {
+                  isDragging = false;
+                  document.body.style.cursor = "default";
+
+                  document.removeEventListener("mousemove", onMouseMove);
+                  document.removeEventListener("mouseup", onMouseUp);
+
+                  document.removeEventListener("touchmove", onTouchMove);
+                  document.removeEventListener("touchend", onMouseUp);
+                }
+
+                sliderHandle.addEventListener("mousedown", (e) => {
+                  e.preventDefault();
+                  isDragging = true;
+                  document.body.style.cursor = "grabbing";
+
+                  document.addEventListener("mousemove", onMouseMove);
+                  document.addEventListener("mouseup", onMouseUp);
+                });
+
+                sliderHandle.addEventListener("touchstart", (e) => {
+                  e.preventDefault();
+
+                  isDragging = true;
+                  document.body.style.cursor = "grabbing";
+
+                  document.addEventListener("touchmove", onTouchMove);
+                  document.addEventListener("touchend", onMouseUp);
+                })
+
+                // Click anywhere on the container to instantly move slider
+                container.addEventListener("click", (e) => {
+                  if (e.target !== sliderHandle) {
+                    updateSliderPosition(e.clientX);
+                  }
+                });
+              });
+            })
         </script>
         <!-- End Google Tag Manager -->
-
         <style>
             .header_content_item:hover {
                 background-color: <?= $headerHover ?> !important;
@@ -191,12 +437,18 @@ function callback($buffer)
             .billings-modal__content-items__item {
                 padding: 32px;
 
-                border-radius: 16px;
+                border-bottom-left-radius: 16px;
+                border-bottom-right-radius: 16px;
                 transition: height 0.5s ease;
 
                 position: relative;
 
                 min-width: 290px;
+            }
+
+            .billings-modal__content-items__item--bordered {
+                border-top-left-radius: 16px;
+                border-top-right-radius: 16px;
             }
 
             .billings-modal__content-items__item.billings-modal__content-items__item--individual .billings-modal__content-items__item-divider {
@@ -366,19 +618,23 @@ function callback($buffer)
             .billings-modal__content-items__item-bonus {
                 display: flex;
 
-                padding: 8px 16px;
+                padding: 6px 0;
+                justify-content: center;
                 align-items: center;
-                gap: 2px;
+                gap: 4px;
 
                 background-color: #FFFFFF;
 
                 position: absolute;
 
                 top: 0;
-                right: 13px;
+                left: 0;
+                transform: translateY(-100%);
 
-                transform: translateY(-50%);
-                border-radius: 15px;
+                border-top-left-radius: 16px;
+                border-top-right-radius: 16px;
+                width: 100%;
+                border-bottom: 1px solid #1F2535;
             }
 
             .billings-modal__content-items__item-bonus span {
@@ -388,7 +644,13 @@ function callback($buffer)
                 letter-spacing: 0;
                 text-align: right;
 
-                color: #0F0F0F;
+                color: #FFFFFF;
+            }
+
+            .billings-modal__content-items__item-bonus img {
+                height: 16px;
+                width: auto;
+                margin: unset;
             }
 
             .billings-modal__content-items__item-btn {
@@ -636,12 +898,12 @@ function callback($buffer)
 
                 <div class="header_socials">
                     <?php foreach ($footer_social_menu as $menu_item): ?>
-                        <a target="_blank" href="<?= $menu_item['item_link'] ?>">
+                        <a target="_blank" rel="noopener noreferrer" href="<?= $menu_item['item_link'] ?>">
                             <img src="<?= $menu_item['item_image'] ?>" alt="#">
                         </a>
                     <?php endforeach; ?>
                 </div>
-                <div class="header_schedule-xs"><a target="_blank"
+                <div class="header_schedule-xs"><a target="_blank" rel="noopener noreferrer"
                                                    href="<?= $header_button_link ?><?= get_params_string() ?>"
                                                    class="site-btn header-btn <?= $GLOBALS['btn_post_class_random'] ?>"><?= $header_button_text; ?></a>
                     <div></div>
@@ -684,7 +946,7 @@ function callback($buffer)
 
                             <div class="billings-modal__content-items">
                                 <?php foreach ($billingsModalList as $billingsModalListItem): ?>
-                                    <div class="billings-modal__content-items__item <?= $billingsModalListItem['billing_modal_list_item_is_individual'] ? " billings-modal__content-items__item--individual" : ""?>" style="background-color: <?= $billingsModalListItem['billing_modal_list_item_background_color'] ?>">
+                                    <div class="billings-modal__content-items__item <?= $billingsModalListItem['billing_modal_list_item_is_individual'] ? " billings-modal__content-items__item--individual" : ""?> <?= empty($billingsModalListItem['billing_modal_list_item_bonus']) ? " billings-modal__content-items__item--bordered" : ""?>" style="background-color: <?= $billingsModalListItem['billing_modal_list_item_background_color'] ?>">
                                         <div class="billings-modal__content-items__item-title">
                                             <?= $billingsModalListItem['billing_modal_list_item_title'] ?>
                                         </div>
@@ -713,7 +975,13 @@ function callback($buffer)
                                         <?php if (!empty($billingsModalListItem['billing_modal_list_item_count'])): ?>
                                             <div class="billings-modal__content-items__item-count">
                                                 <div class="billings-modal__content-items__item-count-value" style="color: <?= $billingsModalListItem['billing_modal_list_item_count_color'] ?>">
-                                                    <?= $billingsModalListItem['billing_modal_list_item_count'] ?>
+                                                    <?php if ($billingsModalListItem['billing_modal_list_item_count_infinite']): ?>
+                                                        <svg width="34" height="17" viewBox="0 0 34 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M25.3867 16.4648C23.8503 16.4648 22.431 16.0742 21.1289 15.293C19.8268 14.4987 18.4271 13.1836 16.9297 11.3477C15.5104 13.1576 14.1432 14.4596 12.8281 15.2539C11.513 16.0352 10.0742 16.4258 8.51172 16.4258C6.10286 16.4258 4.11068 15.6576 2.53516 14.1211C0.959635 12.5846 0.171875 10.638 0.171875 8.28125C0.171875 5.92448 0.966146 3.96484 2.55469 2.40234C4.14323 0.839844 6.14193 0.0585938 8.55078 0.0585938C10.1133 0.0585938 11.5521 0.455729 12.8672 1.25C14.1823 2.04427 15.5625 3.35286 17.0078 5.17578C18.388 3.39193 19.7422 2.10286 21.0703 1.30859C22.3984 0.501302 23.8503 0.0976562 25.4258 0.0976562C27.8346 0.0976562 29.8268 0.872396 31.4023 2.42188C32.9779 3.95833 33.7656 5.89844 33.7656 8.24219C33.7656 10.599 32.9648 12.5586 31.3633 14.1211C29.7747 15.6836 27.7826 16.4648 25.3867 16.4648ZM8.76562 4.14062C7.56771 4.14062 6.5651 4.53776 5.75781 5.33203C4.95052 6.11328 4.54688 7.08984 4.54688 8.26172C4.54688 9.43359 4.95052 10.4102 5.75781 11.1914C6.5651 11.9727 7.56771 12.3633 8.76562 12.3633C9.74219 12.3633 10.6667 12.0508 11.5391 11.4258C12.4245 10.7878 13.4271 9.72656 14.5469 8.24219C13.3229 6.71875 12.2878 5.65755 11.4414 5.05859C10.5951 4.44661 9.70312 4.14062 8.76562 4.14062ZM28.1797 11.1914C28.987 10.3971 29.3906 9.41406 29.3906 8.24219C29.3906 7.07031 28.987 6.09375 28.1797 5.3125C27.3854 4.53125 26.3893 4.14062 25.1914 4.14062C24.2018 4.14062 23.2578 4.45964 22.3594 5.09766C21.474 5.73568 20.4844 6.79688 19.3906 8.28125C20.6276 9.81771 21.6693 10.8854 22.5156 11.4844C23.362 12.0703 24.2474 12.3633 25.1719 12.3633C26.3698 12.3633 27.3724 11.9727 28.1797 11.1914Z" fill="white"/>
+                                                        </svg>
+                                                    <?php else: ?>
+                                                        <?= $billingsModalListItem['billing_modal_list_item_count'] ?>
+                                                    <?php endif; ?>
                                                 </div>
                                                 <div class="billings-modal__content-items__item-count-sub" style="color: <?= $billingsModalListItem['billing_modal_list_item_count_subs_color'] ?>">
                                                     <?= $billingsModalListItem['billing_modal_list_item_count_subs'] ?>
@@ -752,13 +1020,24 @@ function callback($buffer)
                                             </div>
                                         </div>
                                         <?php if (!empty($billingsModalListItem['billing_modal_list_item_bonus'])): ?>
-                                            <div class="billings-modal__content-items__item-bonus">
-                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.4208 0.076195C8.63766 0.214264 8.78223 0.507028 8.70995 0.777382L7.48106 4.39825L10.0834 4.1185C10.3726 4.08959 10.5894 4.22115 10.734 4.44741C10.8786 4.67439 10.8063 4.94692 10.5894 5.1298L3.79441 11.8149C3.57755 12.021 3.21611 12.0593 2.99925 11.9082C2.7101 11.7571 2.63781 11.4578 2.7101 11.1911L4.15585 7.61866L1.91494 7.88106C1.62579 7.91214 1.40893 7.78708 1.26435 7.56733C1.11978 7.34758 1.19207 7.07795 1.33664 6.89072L7.62564 0.204866C7.77021 -0.00838113 8.13165 -0.0618738 8.4208 0.076195Z" fill="#0F0F0F"/>
-                                                </svg>
+                                            <div class="billings-modal__content-items__item-bonus" style="background-color: <?= $billingsModalListItem['billing_modal_list_item_background_color'] ?>; padding: <?= !empty($billingsModalListItem['billing_modal_suffix_svg_icon']) ? '12px 0' : '6px 0' ?>;">
+                                                <!--                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+                                                <!--                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.4208 0.076195C8.63766 0.214264 8.78223 0.507028 8.70995 0.777382L7.48106 4.39825L10.0834 4.1185C10.3726 4.08959 10.5894 4.22115 10.734 4.44741C10.8786 4.67439 10.8063 4.94692 10.5894 5.1298L3.79441 11.8149C3.57755 12.021 3.21611 12.0593 2.99925 11.9082C2.7101 11.7571 2.63781 11.4578 2.7101 11.1911L4.15585 7.61866L1.91494 7.88106C1.62579 7.91214 1.40893 7.78708 1.26435 7.56733C1.11978 7.34758 1.19207 7.07795 1.33664 6.89072L7.62564 0.204866C7.77021 -0.00838113 8.13165 -0.0618738 8.4208 0.076195Z" fill="#0F0F0F"/>-->
+                                                <!--                                                </svg>-->
+
+                                                <?php
+                                                if (!empty($billingsModalListItem['billing_modal_prefix_svg_icon'])) {
+                                                    echo '<img src="' . esc_url($billingsModalListItem['billing_modal_prefix_svg_icon']) . '" alt="Billing Icon" style="height: ' . $billingsModalListItem['billing_modal_prefix_svg_icon_height'] . '" />';
+                                                }
+                                                ?>
                                                 <span>
                                                     <?= $billingsModalListItem['billing_modal_list_item_bonus'] ?>
                                                 </span>
+                                                <?php
+                                                if (!empty($billingsModalListItem['billing_modal_suffix_svg_icon'])) {
+                                                    echo '<img src="' . esc_url($billingsModalListItem['billing_modal_suffix_svg_icon']) . '" alt="Billing Icon" style="height: ' . $billingsModalListItem['billing_modal_suffix_svg_icon_height'] . '" />';
+                                                }
+                                                ?>
                                             </div>
                                         <?php endif; ?>
                                     </div>
@@ -769,10 +1048,10 @@ function callback($buffer)
                 </div>
 
                 <? if (empty($BtnUniqueText)): ?>
-                    <a target="_blank" href="<?= $header_button_link ?><?= get_params_string() ?>"
+                    <a target="_blank" rel="noopener noreferrer" href="<?= $header_button_link ?><?= get_params_string() ?>"
                        class="site-btn header-btn <?= $GLOBALS['btn_post_class_random'] ?>"><?= $header_button_text; ?></a>
                 <? else: ?>
-                    <a target="_blank" href="<?= $header_button_link ?><?= get_params_string() ?>"
+                    <a target="_blank" rel="noopener noreferrer" href="<?= $header_button_link ?><?= get_params_string() ?>"
                        class="site-btn header-btn <?= $GLOBALS['btn_post_class_random'] ?>"><?= $BtnUniqueText; ?></a>
                 <? endif; ?>
             </div>
