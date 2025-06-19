@@ -90,9 +90,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     '                                </a>' +
                     '                                <div class="page__blog--item__content news__cards bgw">' +
                     '                                    <div>' +
-                    '                                        <div class="93 page__blog--news__date">' +
+                    '                                        <div class="page__blog--news__date">' +
                     '                                            <div class="card__tag-black"><ul class="post-categories"> <li><a href="https://blog.24ttl.net/category/news/" rel="category tag">News</a></li></ul></div>' +
-                    '                                            <p class="95 page__blog--new__date card__text-black">'+ newsFullDate +'</p>' +
+                    '                                            <p class="page__blog--new__date card__text-black">'+ newsFullDate +'</p>' +
                     '                                        </div>' +
                     '                                        <a href="'+ data[i].link +'" class="page__blog--item__title">'+ newsTitleSmall +'</a>' +
                     '                                    </div>' +
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 blogCard.innerHTML = '<div class="page__blog--item__content media__blog--item blog__block p32" style="background: url('+blogFullImg+') center no-repeat; background-size: cover;">' +
                     '                                    <div>' +
-                    '                                        <div class="139 page__blog--news__date">' +
+                    '                                        <div class="page__blog--news__date">' +
                     '                                            <div class="card__tag-while"><ul class="post-categories"> <li><a href="https://blog.24ttl.net/category/blog/" rel="category tag">Blog</a></li></ul></div>' +
                     '                                            <p class="page__blog--new__date">'+blogFullDate+'</p>' +
                     '                                        </div>' +
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 pressCard.innerHTML = '<div class="media__blog--item page__blog--item__content bg__gray b20">' +
                     '                                    <div>' +
-                    '                                        <div class="188 page__blog--news__date">' +
+                    '                                        <div class="page__blog--news__date">' +
                     '                                            <div class="card__tag-black"><ul class="post-categories"> <li><a href="https://blog.24ttl.net/category/press/" rel="category tag">Press</a></li></ul></div>' +
                     '                                            <p class="page__blog--new__date card__text-black">'+ pressFullDate +'</p>' +
                     '                                        </div>' +

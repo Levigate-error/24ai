@@ -8,7 +8,7 @@ get_header();
         <div class="container">
             <div class="page__blog--inner wrap">
 	            <?php $posts = new WP_Query([
-		            'posts_per_page' => 4,
+		            'posts_per_page' => 999999,
 		            'category_name' => 'blog',
 		            'post_type' => 'post',
 

@@ -711,7 +711,7 @@
 }
 
 .post {
-    padding: 160px 0 117px;
+    padding: 160px 0 80px;
 }
 
 .post__caption {
@@ -937,7 +937,7 @@
     padding: 20px 38px 39px !important;
     /*margin-bottom: 20px;*/
     margin-bottom: 0px;
-    
+
 }
 
 .post__block--link {
@@ -1541,6 +1541,112 @@
 
 .card_news--link .left__block--content {
     padding: 100px 60px 60px 30px;
+}
+
+.height-700 .card.page__blog--item {
+    height: 700px;
+}
+.height-1000 .card.page__blog--item {
+    height: 1000px;
+}
+.height-1200 .card.page__blog--item {
+    height: 1200px;
+}
+
+.post_author {
+    margin-top: 76px;
+    display: flex;
+    gap: 42px;
+}
+
+.post_author img {
+    width: 139px;
+    height: 139px;
+    object-fit: cover;
+    margin: 0;
+}
+
+.post_author-content {
+    display: flex;
+    gap: 0;
+    flex-direction: column;
+}
+
+.post_author-content p {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: 0;
+    vertical-align: middle;
+    color: #000000;
+
+    margin: 0;
+}
+
+.comment-respond {
+    max-width: 1165px;
+    margin: 0 auto;
+}
+
+.comment-respond .comment-reply-title {
+    font-size: 2.8rem;
+
+    margin-bottom: 8px;
+}
+.comment-form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.comment-form .comment-form-cookies-consent {
+    display: none;
+}
+
+.comment-form p:first-of-type br {
+    display: none;
+}
+
+.comment-form p:first-of-type {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.comment-form p:first-of-type label {
+    font-size: 1.5rem;
+    line-height: 1;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.comment-form p:first-of-type textarea {
+    min-width: 300px;
+    min-height: 150px;
+    border-radius: 8px;
+    border: 1px solid #000000;
+
+    padding: 8px;
+}
+
+.comment-form .form-submit {
+    width: fit-content;
+
+    border-radius: 8px;
+    border: none;
+
+    background: #000000;
+    padding: 8px 16px;
+}
+
+.comment-form .form-submit input[type=submit] {
+    color: #FFFFFF;
+
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
 }
 
 @media (max-width: 1200px) {

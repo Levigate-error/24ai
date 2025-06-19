@@ -1525,7 +1525,7 @@ textarea {
     height: fit-content;
     text-align: center;
     border-radius: 0 0 50px 50px;
-    padding: 115px 60px 100px 60px;
+    padding: 160px 60px 100px 60px;
     overflow-x: hidden;
 }
 @media screen and (max-width: 992px){
@@ -1741,8 +1741,7 @@ textarea {
 
 @media screen and (max-width:576px) {
     .site-hero.banner__hero {
-        transition: padding 0.5s ease-in-out;
-        padding: 240px 35px 40px;
+        padding: 110px 35px 40px;
     }
 
     .site-count__slider {
@@ -6647,10 +6646,11 @@ textarea {
 
 @media(max-width: 1200px) {
 
-    padding: 30px;
-    display: flex;
-    justify-content: center;
-    width: 100%;
+    .header_socials {
+        padding: 30px;
+        display: inline-block;
+        width: 100%;
+    }
 
     .header_socials a {
         margin: 0 10px 0 0;
@@ -8363,53 +8363,4 @@ color: #FFFFFF;
         width: 60px;
         height: 60px;       
     }
-}
-.author-profile {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.author-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.author-avatar {
-    margin-right: 20px;
-}
-
-.author-name {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.author-posts {
-    margin-top: 20px;
-}
-
-.post-item {
-    margin-bottom: 15px;
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-}
-
-.post-title {
-    font-size: 20px;
-    margin: 0;
-}
-
-.post-title a {
-    text-decoration: none;
-    color: #333;
-}
-
-.post-excerpt {
-    color: #666;
 }

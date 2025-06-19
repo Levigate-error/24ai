@@ -198,6 +198,21 @@ add_filter( 'excerpt_length', function(){
 });
 add_filter( 'excerpt_more', fn() => '...' );
 
+add_filter('comment_form_default_fields', function($fields) {
+    unset($fields['author'], $fields['email'], $fields['url']);
+    return $fields;
+});
+
+add_filter('pre_comment_approved', function($approved, $commentdata) {
+    return 1; // 1 = опубликован
+}, 10, 2);
+
+add_filter('home_url', function($url, $path, $orig_scheme, $blog_id) {
+    return 'https://24ai.tech/ru/' . $path;
+}, 10, 4);
+
+remove_action('comment_form', 'comment_form_cookie_consent');
+
 function crb_load() {
     require_once( 'vendor/autoload.php' );
     \Carbon_Fields\Carbon_Fields::boot();
@@ -296,6 +311,7 @@ function orm_scripts() {
     wp_enqueue_style('tabbed-thumbs-gallery-css', get_template_directory_uri() . '/css/components/new-components/tabbed-thumbs-gallery.css', array(), _S_VERSION);
     wp_enqueue_style('post-page-options-css', get_template_directory_uri() . '/css/components/new-components/post-page-options.css', array(), _S_VERSION);
     wp_enqueue_style('agregator-css', get_template_directory_uri() . '/css/components/new-components/agregator.css', array(), _S_VERSION);
+    wp_enqueue_style('custom-author', get_template_directory_uri() . '/css/custom-author.css', array(), _S_VERSION);
 
     if(is_rtl()){
         wp_enqueue_style('rtl-fix-css', get_template_directory_uri() . '/css/rtl-fix.css', array(), _S_VERSION);
@@ -358,7 +374,15 @@ function mihdan_add_defer_attribute( $tag, $handle ) {
 }
 
 add_filter( 'script_loader_tag', 'mihdan_add_defer_attribute', 10, 2 );
-
+add_filter('preprocess_comment', function ($commentdata) {
+    if (empty($commentdata['comment_author'])) {
+        $commentdata['comment_author'] = 'Anonymous';
+    }
+    if (empty($commentdata['comment_author_email'])) {
+        $commentdata['comment_author_email'] = 'anon@example.com';
+    }
+    return $commentdata;
+});
 /**
  * Implement the Custom Header feature.
  */
@@ -431,6 +455,7 @@ function true_loadmore() {
 
     wp_die();
 }
+
 
 function get_params_string(){
     $get = $_GET;
@@ -644,12 +669,48 @@ function the_breadcrumb()
     }
 } // end the_breadcrumb()
 
+function register_author_post_type() {
+    register_post_type('custom_author', [
+        'labels' => [
+            'name' => 'Авторы',
+            'singular_name' => 'Автор',
+            'add_new' => 'Добавить автора',
+            'add_new_item' => 'Добавить нового автора',
+            'edit_item' => 'Редактировать автора',
+            'new_item' => 'Новый автор',
+            'view_item' => 'Просмотреть автора',
+            'search_items' => 'Искать автора',
+            'not_found' => 'Авторы не найдены',
+            'menu_name' => 'Авторы',
+        ],
+        'public' => true,
+        'has_archive' => true,
+        'rewrite' => ['slug' => 'author', 'with_front' => false],
+        'supports' => ['title', 'editor', 'thumbnail'],
+        'show_in_rest' => true,
+        'menu_position' => 5,
+        'menu_icon' => 'dashicons-admin-users',
+    ]);
 
-// redirection 
+    flush_rewrite_rules();
+}
+add_action('init', 'register_author_post_type');
+
+function custom_author_template($template) {
+    if (is_singular('author')) {
+        $new_template = locate_template(array('single-custom_author.php'));
+        if (!empty($new_template)) {
+            return $new_template;
+        }
+    }
+    return $template;
+}
+add_filter('template_include', 'custom_author_template');
+
+// redirection
 function custom_page_redirect() {
     if (is_page() && in_the_loop()) {
         global $post;
-
         // Get the parent page
         $parent_page = get_page_by_path('tools');
 
@@ -661,6 +722,29 @@ function custom_page_redirect() {
         }
     }
 }
+
+function add_post_view_count() {
+    if (is_single() && get_post_type() === 'post') {
+        $post_id = get_the_ID();
+        $views = get_post_meta($post_id, 'views', true);
+        $views = $views ? $views + 1 : 1;
+        update_post_meta($post_id, 'views', $views);
+    }
+}
+add_action('wp_head', 'add_post_view_count');
+
+add_action('wp_head', function() {
+    if (is_singular("custom_author")) {
+        $author = get_queried_object();
+        $name = esc_html(get_the_title($author->ID));
+        ?>
+
+        <title>Статьи от <?= $name ?> – Эксперт в нейросетях, AI-инструментах и улучшении изображений</title>
+        <meta name="description" content="<?= $name ?> делится опытом работы с нейросетями, улучшением качества изображений и современными технологиями. Читайте статьи автора на 24AI, чтобы узнать больше о веб-дизайне, искусственном интеллекте и многом другом.">
+        <?php
+    }
+}, 1);
+
 add_action('template_redirect', 'custom_page_redirect');
 
 //end redirection
@@ -676,4 +760,3 @@ function redirect_percent_20_to_404() {
         exit;
     }
 }
-

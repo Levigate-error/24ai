@@ -1,6 +1,7 @@
 <?php
 $cat = get_the_category(get_the_ID());
 $type_card = carbon_get_post_meta(get_the_ID(), 'type_card');
+$blog_img_id = carbon_get_post_meta(get_the_ID(), 'preview_blog_card');
 $posts_source_link = carbon_get_post_meta(get_the_ID(), 'posts_source_link');
 $brandImg = carbon_get_post_meta(get_the_ID(), 'posts_source');
 $bgColor = carbon_get_post_meta(get_the_ID(), 'posts_bg_color');
@@ -23,12 +24,10 @@ $trimmed_excerpt = count($words) > $word_limit
     ? implode(' ', array_slice($words, 0, $word_limit)) . '...'
     : $full_excerpt;
 
-if ($type_card == 'card_blog') {
-    $backgroundUrl = wp_get_attachment_image_url($preview_blog_card, 'full');;
-} elseif ($type_card == 'card_news') {
+if (!empty($blog_img_id)) {
+    $backgroundUrl = wp_get_attachment_image_url($blog_img_id, 'full');;
+} else {
     $backgroundUrl = get_the_post_thumbnail_url();
-} elseif ($type_card == 'card_press' && $brandImg) {
-    $backgroundUrl = wp_get_attachment_image_url($brandImg, 'full');
 }
 ?>
 <div itemscope itemprop="blogPost"

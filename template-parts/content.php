@@ -6,173 +6,30 @@
  *
  * @package orm
  */
-$author_id = get_post_field('post_author', get_the_ID());
-$author_info = get_userdata($author_id);
 ?>
 <div class="mt70">
     <article  <?php post_class(); ?>>
         <div class="post-wrap">
             <div class="container">
-                
-        <div class="blog-breadcrumb"><?php if (function_exists('the_breadcrumb')) the_breadcrumb(); ?></div>
+
+                <div class="blog-breadcrumb"><?php if (function_exists('the_breadcrumb')) the_breadcrumb(); ?></div>
                 <div class="post_header">
                     <? if(!empty(carbon_get_post_meta( get_the_ID(), 'header_logo' ))): ?>
-                    <img src="<?php echo carbon_get_post_meta( get_the_ID(), 'header_logo' ); ?>" alt="img" class="">
-                 <? endif; ?>           
+                        <img src="<?php echo carbon_get_post_meta( get_the_ID(), 'header_logo' ); ?>" alt="img" class="">
+                    <? endif; ?>
                     <p class="post_header-text"><?php echo carbon_get_post_meta( get_the_ID(), 'header_text' ); ?></p>
                     <a class="post_header-button site-btn" href="<?php echo carbon_get_post_meta( get_the_ID(), 'header_url' ); ?>" style="background: <?php echo carbon_get_post_meta( get_the_ID(), 'header_button_color' ); ?>">
                         <?php echo carbon_get_post_meta( get_the_ID(), 'header_button' ); ?>
                     </a>
                 </div>
                 <div class="post__caption banner__hero">
-<!--                    <a class="author-part" href="--><?php //= get_avatar_url( $author_id )?><!--">-->
-<!--                        <div class="author-pic" style="position: relative;-->
-<!--    width: 54px;-->
-<!--    height: 54px;-->
-<!--    margin-right: 13px;-->
-<!--    flex-shrink: 0;-->
-<!--    border-radius: 50px;-->
-<!--    ">-->
-<!--                            <img style="position: relative;-->
-<!--    width: 100%;-->
-<!--    max-width: 100%;-->
-<!--    z-index: 1;-->
-<!--    border-radius: 50px;" class="" data-lazy="--><?php //= get_avatar_url($author_id)?><!--" alt="" src="--><?php //= get_avatar_url( $author_id )?><!--">-->
-<!--                        </div>--><?////=$author_info->display_name?>
-<!--                        <div class="author-info" style="display: flex;flex-direction: column;" itemprop="author" itemscope="" itemtype="http://schema.org/Person">-->
-<!--                            <meta itemprop="url" content="--><?php //= get_avatar_url( $author_id )?><!--">-->
-<!--                            <span class="author-name"  itemprop="name">-->
-<?php //=($author_info->display_name=='vitalytsoy'?'Администратор': $author_info->display_name)?><!-- </span>-->
-<!---->
-<!--                        </div>-->
-<!--                    </a>-->
-
                     <div class="post__caption--inner">
                         <div class="post__caption--item">
 
                             <div class="page__blog--news__date post__date">
-
                                 <div class="post__cat m0"><?= the_category();?></div>
                                 <p class="page__blog--new__date black"><?= get_the_date('F j, Y');?></p>
-</div>
-
-                            <?php
-                            $post_id = get_the_ID();
-                            $author_id = get_post_field('post_author', $post_id);
-                            $author_name = get_the_author_meta('display_name', $author_id);
-                            $first_name = get_the_author_meta('first_name', $author_id);
-                            $last_name = get_the_author_meta('last_name', $author_id);
-                            $author_email = get_the_author_meta('user_email', $author_id);
-                            $description = get_the_author_meta('description', $author_id);
-
-                            if (function_exists('get_avatar_url')) {
-                                $avatar_url = get_avatar_url($author_id);
-                            } else {
-                                // Если аватар не установлен, можно использовать аватар по умолчанию
-                                $avatar_url = 'URL_аватара_по_умолчанию';
-                            }
-//поиск автора что бы выдать ссылку на него
-                            $category = get_category_by_slug('avtory'); // Замените 'avtory' на слаг вашей категории
-                            $category_id = $category ? $category->term_id : 0;
-
-                            if ($category_id) {
-                                // Создаем новый запрос для получения первого поста в категории "Авторы" с автором "Виталий Климов"
-                                $args = array(
-                                    'cat' => $category_id,
-                                    'author' =>  $author_id, // Замените на слаг автора
-                                    'posts_per_page' => 1, // Получаем только один пост
-                                );
-
-                                $query = new WP_Query($args);
-
-                                // Проверяем, есть ли посты
-                                if ($query->have_posts()) {
-                                    $query->the_post();
-                                    // Получаем ссылку на пост
-                                    $post_link = get_permalink();
-
-                                }
-
-                                // Сбрасываем данные запроса
-                                wp_reset_postdata();
-                            }
-                            ?>
-
-
-
-
-
-
-
-
-
-
-
-<!--                            <div class="author-pic" style=" position: relative;-->
-<!--    width: 100px;-->
-<!--    height: 100px;-->
-<!--    margin-right: 13px;-->
-<!--    border-radius: 50px;-->
-<!--    background: #ced4da;-->
-<!--    flex-shrink: 0">-->
-<!--<img style="  position: relative;-->
-<!--    width: 100%;-->
-<!--    max-width: 100%;-->
-<!--    z-index: 1;-->
-<!--    border-radius: 50px" src="--><?php //=$avatar_url;?><!--">-->
-<!--                            </div>-->
-
-
-
-<?php
-$categories = get_the_category();
-
-if (!empty($categories)) {
-    // Выводим названия категорий
-    foreach ($categories as $category) {
-
-        if ($category->cat_name!=='Авторы')
-        {
-            echo <<<HTML
-    <div class="author-pic" style=" position: relative;
-    width: 100px;
-    height: 100px;
-    margin-right: 13px;
-    border-radius: 50px;
-    background: #ced4da;
-    flex-shrink: 0">
-    <a href="{$post_link}">
-<img style="  position: relative;
-    width: 100%;
-    max-width: 100%;
-    z-index: 1;
-    border-radius: 50px" src="{$avatar_url}"></a>
                             </div>
-
- <p id="{$author_name}" itemprop="author" itemscope itemtype="http://schema.org/Person"> Автор: <strong  itemprop="name">{$first_name} {$last_name}</strong><br>
-                               <span itemprop="jobTitle"> {$description}</span>
-                                <br><span  itemprop="email">{$author_email}</span>
-                            </p>
-HTML;
-
-
-
-
-        }
-    }
-} else {
-    echo 'Нет категорий для этого поста.';
-}
-?>
-
-
-
-
-
-
-
-
-
                             <h1 class="page__blog--news__title text-black text-left"><?=the_title();?></h1>
                             <div class="post__caption--tags">
                                 <div class="tag__title"><?=the_tags();?></div>
@@ -225,6 +82,22 @@ HTML;
 
                         <div class="post__content">
                             <?= the_content(); ?>
+                            <?php if (!empty(get_post_meta( get_the_ID(), 'custom_author', true ))): ?>
+                                <?php
+                                $author_id = get_post_meta(get_the_ID(), 'custom_author', true);
+                                $author_link = get_permalink($author_id);
+                                $author_name = get_the_title($author_id);
+                                $author_subtitle = get_field('author_subtitle', $author_id);
+                                $author_photo = get_field('author_photo', $author_id);
+                                ?>
+                                <a class="post_author" href="<?= $author_link ?>">
+                                    <img src="<?= $author_photo ?>" alt="post-author-photo"/>
+                                    <div class="post_author-content">
+                                        <p>Автор: <?= $author_name ?></p>
+                                        <p><?= $author_subtitle ?></p>
+                                    </div>
+                                </a>
+                            <?php endif; ?>
                         </div>
                         <div class="post__social post__content--social">
                             <button
@@ -274,22 +147,28 @@ HTML;
                     <div class="post__sidebar">
                         <?php get_template_part("template-parts/sidebar_post"); ?>
                     </div>
-                                                        
-                </div>
-                <div class="post_header">
-                    <? if(!empty(carbon_get_post_meta( get_the_ID(), 'footer_logo' ))): ?>
-                    <img src="<?php echo carbon_get_post_meta( get_the_ID(), 'footer_logo' ); ?>" alt="img" class="">
-                 <? endif; ?>           
-                    <p class="post_header-text"><?php echo carbon_get_post_meta( get_the_ID(), 'footer_text' ); ?></p>
-                    <a class="post_header-button site-btn" href="<?php echo carbon_get_post_meta( get_the_ID(), 'footer_url' ); ?>" style="background: <?php echo carbon_get_post_meta( get_the_ID(), 'footer_button_color' ); ?>">
-                        <?php echo carbon_get_post_meta( get_the_ID(), 'footer_button' ); ?>
-                    </a>
+
                 </div>
             </div>
 
         </div>
 
     </article>
+    <?php
+    // Подключаем форму комментариев
+    comment_form([
+        'title_reply' => 'Оставьте комментарий',
+        'comment_notes_before' => '',
+        'comment_notes_after' => '',
+        'fields' => [
+            'author' => '<p style="display:none;"><input id="author" name="author" type="hidden" value="anonymous"></p>',
+            'email'  => '<p style="display:none;"><input id="email" name="email" type="hidden" value="anonymous@example.com"></p>',
+        ],
+        'comment_field' => '<p><label for="comment">Комментарий</label><br><textarea id="comment" name="comment" required></textarea></p>',
+        'label_submit' => 'Отправить',
+        'cookies' => ''
+    ]);
+    ?>
     <?php get_template_part("block-templates/more_news"); ?>
     <?php get_template_part("block-templates/all_media"); ?>
 </div>

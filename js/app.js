@@ -1575,10 +1575,8 @@ tabbedThumbsSwipers.forEach(function (swiperEl) {
         [...headerContent].forEach(item => {
             if (window.innerWidth <= 1200) {
                 item.classList.remove('header_content-mob-active')
-
             } else {
                 item.classList.remove('active_content')
-
             }
         })
     })
@@ -1817,12 +1815,17 @@ tabbedThumbsSwipers.forEach(function (swiperEl) {
       smoothing: true,
       smoothingAmount: 100,
     };
-    
-    const viewers = document.querySelectorAll(".image-compare");
-  
-    viewers.forEach((element) => {
-      let view = new ImageCompare(element, options).mount();
-    });
+
+//     const viewers = document.querySelectorAll(".image-compare");
+//
+//     viewers.forEach((element) => {
+//       let view = new ImageCompare(element, options).mount();
+//     });
+//     const wrapper = document.querySelector('.icv__wrapper');
+//     wrapper.style.width = 'auto';
+//     const newWidth = wrapper.offsetWidth;
+//     wrapper.style.width = `${newWidth}px`;
+// });
 });
 
     var ytplayerList;

@@ -3,11 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     $('.header_nav__item--has-sub-menu').on('click', function() {
         $(".header_nav__item--has-sub-menu").not(this).removeClass("active_content");
         if (!$(this).hasClass('active_content')) { // если класса нет
-            console.log('scroll add active content');
             $(this).addClass('active_content');
             $('.menu__open').addClass('active');
         } else {
-            console.log('scroll remove active content');
             $(this).removeClass('active_content');
             $('.menu__open').removeClass('active');
         }

@@ -395,12 +395,14 @@ Container::make( 'post_meta', 'Blog options' )
 Container::make( 'post_meta', 'Previews cards' )
         ->where( 'post_type', '=', 'post' )
 
-        ->add_tab( 'Preview slider card', [
-	        Field::make( 'image', 'preview_slider_full', 'Preview slider card (1150x615)' )->set_width(50),
-	        Field::make( 'image', 'preview_slider_mob', 'Preview slider card (480x520)' )->set_width(50),
+        ->add_tab( 'Обложка в самой статье', [
+	        Field::make( 'image', 'preview_slider_full', '(1165x624)' )->set_width(50),
         ])
-        ->add_tab( 'Preview blog card', [
-            Field::make( 'image', 'preview_blog_card', 'Preview blog card (550x700)' ),
+        ->add_tab( 'Обложка статьи на странице Блога', [
+            Field::make( 'image', 'preview_blog_card', '(570x700)' ),
+        ])
+        ->add_tab( 'Обложка статьи на страницах инструментов', [
+            Field::make( 'image', 'preview_tools_card', '(360x520)' ),
         ])
         ->add_tab( 'Preview press card', [
             Field::make( 'text', 'posts_source_link', 'Source link' )->set_visible_in_rest_api( $visible = true ),
@@ -425,6 +427,12 @@ Container::make( 'post_meta', 'Articles' )
 			              'post_type' => 'post',
 		              ]
 	              ] )->set_max(1),
+             Field::make('select', 'posts_resolution', 'Post size')
+                 ->set_options( array(
+                   '700px' => 'Height 700',
+                   '1000px' => 'Height 1000',
+                   '1200px' => 'Height 1200',
+                 ))
          ])
          ->add_tab( '3 article', [
 	         Field::make( 'association', 'posts_sidebar2', '3 article' )
