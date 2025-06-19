@@ -5,20 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f3731a4b-111c-4203-9539-b83e121128b9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/!!footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/!!footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/!footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/!footer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/carbon-fields/theme-options.php" beforeDir="false" afterPath="$PROJECT_DIR$/carbon-fields/theme-options.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/components/new-components/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/components/new-components/footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/home_page.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/home_page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/home_page.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/home_page.min.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/custom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/main.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.min.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +37,9 @@
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="2tBITu36y9uwEoCWkmEmQkDEuH3" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
