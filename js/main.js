@@ -111,3 +111,26 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
 });
+
+
+
+const billingModalBtn = document.querySelector("#billings-modal-btn")
+const billingModal = document.querySelector("#billings-modal")
+const billingModalBg = document.querySelector("#billings-modal .billings-modal__bg");
+const billingModalClose = document.querySelector("#billings-modal .billings-modal__content .billings-modal--close");
+
+console.log(billingModalBg, billingModalClose, "hmm")
+
+billingModalBtn.addEventListener('click', () => {
+  billingModal.style.display = "flex";
+})
+
+const handleCloseBillingModal = () => {
+  billingModal.style.display = "none";
+}
+
+billingModalBg.addEventListener('click', () => {
+  console.log("close")
+  handleCloseBillingModal()
+});
+billingModalClose.addEventListener('click', () => handleCloseBillingModal());

@@ -90,6 +90,7 @@ function fields_and_options()
             Field::make('complex', 'billings_modal_list', 'Billings modal list')
                 ->add_fields(array(
                     Field::make('text', 'billing_modal_list_item_title', 'Billing title'),
+                    Field::make('color', 'billing_modal_list_item_title_color', 'Billing title color'),
                     Field::make('color', 'billing_modal_list_item_background_color', 'Billing back ground color'),
                     Field::make('checkbox', 'billing_modal_list_item_is_individual', 'Is billing individual')->set_default_value(false),
 
@@ -938,6 +939,8 @@ function fields_and_options()
                 )),
             Field::make('text', 'upload_hero_privacy_text', 'Privacy text'),
             Field::make('color', 'upload_hero_privacy_text_color', 'Privacy text color'),
+            Field::make('checkbox', 'show_widget', 'Show widget')
+                ->set_default_value(true),
             Field::make('select', 'current_service', 'Current Service')
                 ->add_options(array(
                     'create_background' => 'create background',
@@ -1018,8 +1021,11 @@ function fields_and_options()
                 </style>
             <? endif; ?>
 
+            <?php
+            $show_widget = !isset($fields['show_widget']) || $fields['show_widget']
+            ?>
             <section id="<?= $hero_id ?>" class="site-hero <?= $bodered_class ?> banner__hero site-hero--upload">
-                <div class="container">
+                <div class="container <?= !$show_widget ? 'without_widget' : '' ?>">
                     <div class="tools-breadcrumb"><?php if (function_exists('the_breadcrumb')) the_breadcrumb(); ?></div>
                     <script>
 
@@ -1035,94 +1041,117 @@ function fields_and_options()
                           span.className = '';
                         }
                       });
-
-
                     </script>
-                    <h1 class="site-hero__title"
-                        style="color:<?= esc_html($fields['upload_hero_title_color']) ?>"><?= $fields['upload_hero_title'] ?></h1>
-                    <div class="hero__sides-wrapper hero__sides-wrapper--upload-hero">
-                        <div class="hero__left-side">
-                            <? if (!empty($upload_hero_desc)): ?>
-                                <div class="upload-hero-desc upload-hero-desc--mobile"><?= $upload_hero_desc ?></div>
-                            <? endif; ?>
-                            <? if (!empty($upload_hero_image)): ?>
-                                <a href="<?= $upload_hero_btn_link ?>"><img
-                                            src="<?= wp_get_attachment_image_url($upload_hero_image, 'full') ?>"
-                                            alt="<?php echo $imgAlt ?>"></a>
-                            <? endif; ?>
-
-                        </div>
-                        <div class="hero__right-side">
-                            <div
-                                <? if (!empty($id)): ?>
-                                    id="<?= $id ?>"
+                    <?php if ($show_widget): ?>
+                        <h1 class="site-hero__title"
+                            style="color:<?= esc_html($fields['upload_hero_title_color']) ?>"><?= $fields['upload_hero_title'] ?></h1>
+                        <div class="hero__sides-wrapper hero__sides-wrapper--upload-hero">
+                            <div class="hero__left-side">
+                                <? if (!empty($upload_hero_desc)): ?>
+                                    <div class="upload-hero-desc upload-hero-desc--mobile"><?= $upload_hero_desc ?></div>
                                 <? endif; ?>
-                                    class="block <?= $margin_mode ?> widget-block">
+                                <? if (!empty($upload_hero_image)): ?>
+                                    <a href="<?= $upload_hero_btn_link ?>"><img
+                                                src="<?= wp_get_attachment_image_url($upload_hero_image, 'full') ?>"
+                                                alt="<?php echo $imgAlt ?>"></a>
+                                <? endif; ?>
 
-                                <div class="widget" style="height: 500px; display: flex;"></div>
-                                <script>
-                                  window.AI_WIDGET_SETTINGS = {
-                                    currentService: '<?php echo $fields['current_service']?>',
-                                    lang: '<?php echo $fields['lang']?>',
-                                    el: '.widget'
-                                  };
-
-                                  document.addEventListener('DOMContentLoaded', function () {
-                                    // Delay execution for 2 seconds
-                                    setTimeout(function () {
-                                      let loaded = false;
-
-                                      function loadScript() {
-                                        if (!loaded) {
-                                          loaded = true;
-                                          var script = document.createElement('script');
-                                          script.src = "https://internal.24ai.tech/js/app.js";
-                                          document.body.appendChild(script);
-                                        }
-                                      }
-
-                                      // Add event listeners after 2-second delay
-                                      document.addEventListener('mousemove', function onMouseMove() {
-                                        loadScript();
-                                        document.removeEventListener('mousemove', onMouseMove);
-                                      });
-
-                                      document.addEventListener('scroll', function onScroll() {
-                                        loadScript();
-                                        document.removeEventListener('scroll', onScroll);
-                                      });
-
-                                    }, 200); // 2 seconds delay
-                                  });
-                                </script>
                             </div>
 
+                            <div class="hero__right-side">
+                                <div
+                                    <? if (!empty($id)): ?>
+                                        id="<?= $id ?>"
+                                    <? endif; ?>
+                                        class="block <?= $margin_mode ?> widget-block">
 
+                                    <div class="widget" style="height: 500px; display: flex;"></div>
+                                    <script>
+                                      window.AI_WIDGET_SETTINGS = {
+                                        currentService: '<?php echo $fields['current_service']?>',
+                                        lang: '<?php echo $fields['lang']?>',
+                                        el: '.widget'
+                                      };
+
+                                      document.addEventListener('DOMContentLoaded', function () {
+                                        // Delay execution for 2 seconds
+                                        setTimeout(function () {
+                                          let loaded = false;
+
+                                          function loadScript() {
+                                            if (!loaded) {
+                                              loaded = true;
+                                              var script = document.createElement('script');
+                                              script.src = "https://internal.24ai.tech/js/app.js";
+                                              document.body.appendChild(script);
+                                            }
+                                          }
+
+                                          // Add event listeners after 2-second delay
+                                          document.addEventListener('mousemove', function onMouseMove() {
+                                            loadScript();
+                                            document.removeEventListener('mousemove', onMouseMove);
+                                          });
+
+                                          document.addEventListener('scroll', function onScroll() {
+                                            loadScript();
+                                            document.removeEventListener('scroll', onScroll);
+                                          });
+
+                                        }, 200); // 2 seconds delay
+                                      });
+                                    </script>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="hero__sides-wrapper hero__sides-wrapper--upload-hero hero__sides-wrapper--no-margin">
-                        <div class="hero__left-side-desc">
-                            <? if (!empty($upload_hero_desc)): ?>
-                                <div class="upload-hero-desc"><?= $upload_hero_desc ?></div>
-                            <? endif; ?>
-                        </div>
-                        <div class="hero__right-side-desc">
-                            <div class="hero-upload-examples">
-                                <? if (!empty($upload_hero_examples_text)): ?>
-                                    <div class="hero-upload-examples__text"><?= $upload_hero_examples_text ?></div>
+                        <div class="hero__sides-wrapper hero__sides-wrapper--upload-hero hero__sides-wrapper--no-margin">
+                            <div class="hero__left-side-desc">
+                                <? if (!empty($upload_hero_desc)): ?>
+                                    <div class="upload-hero-desc"><?= $upload_hero_desc ?></div>
                                 <? endif; ?>
-                                <? if (!empty($upload_hero_examples)): ?>
-                                    <div class="hero-upload-examples__images">
-                                        <? foreach ($upload_hero_examples as $example): ?>
-                                            <a href="<?= $upload_hero_btn_link ?>"><img
-                                                        src="<?= wp_get_attachment_image_url($example['image']) ?>"
-                                                        alt=""></a>
-                                        <? endforeach ?>
-                                    </div>
+                            </div>
+                            <div class="hero__right-side-desc">
+                                <div class="hero-upload-examples">
+                                    <? if (!empty($upload_hero_examples_text)): ?>
+                                        <div class="hero-upload-examples__text"><?= $upload_hero_examples_text ?></div>
+                                    <? endif; ?>
+                                    <? if (!empty($upload_hero_examples)): ?>
+                                        <div class="hero-upload-examples__images">
+                                            <? foreach ($upload_hero_examples as $example): ?>
+                                                <a href="<?= $upload_hero_btn_link ?>"><img
+                                                            src="<?= wp_get_attachment_image_url($example['image']) ?>"
+                                                            alt=""></a>
+                                            <? endforeach ?>
+                                        </div>
+                                    <? endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    <? else: ?>
+                        <div class="hero__sides-wrapper hero__sides-wrapper--upload-hero hero__sides-wrapper__without_widget">
+                            <div class="hero__left-side">
+                                <? if (!empty($upload_hero_desc)): ?>
+                                    <div class="upload-hero-desc upload-hero-desc--mobile"><?= $upload_hero_desc ?></div>
+                                <? endif; ?>
+                                <? if (!empty($upload_hero_image)): ?>
+                                    <a href="<?= $upload_hero_btn_link ?>"><img
+                                                src="<?= wp_get_attachment_image_url($upload_hero_image, 'full') ?>"
+                                                alt="<?php echo $imgAlt ?>"></a>
+                                <? endif; ?>
+
+                            </div>
+                        </div>
+                        <h1 class="site-hero__title"
+                            style="color:<?= esc_html($fields['upload_hero_title_color']) ?>"><?= $fields['upload_hero_title'] ?></h1>
+                        <div class="hero__sides-wrapper hero__sides-wrapper--upload-hero hero__sides-wrapper--no-margin">
+                            <div class="hero__left-side-desc">
+                                <? if (!empty($upload_hero_desc)): ?>
+                                    <div class="upload-hero-desc"><?= $upload_hero_desc ?></div>
                                 <? endif; ?>
                             </div>
                         </div>
-                    </div>
+                        <a class="site-btn" href="https://app.24ai.tech/ru/auth/registration">Попробовать сейчас</a>
+                    <? endif; ?>
                 </div>
             </section>
             <?php
@@ -2285,30 +2314,30 @@ function fields_and_options()
                                                     <? endif; ?>
                                                     <? if (!empty($tab['image'] and !empty($tab['image_after']))): ?>
 
-                                                    <div class="image-compare comparison-container comparison-container-first">
-                                                        <img class="not-lazy comparison-top" loading="lazy" alt=""
-                                                             src="<?= $tab['image'] ?>">
-                                                        <img style="width:auto;" class="not-lazy" loading="lazy"
-                                                             alt=""
-                                                             src="<?= $tab['image_after'] ?>">
-                                                        <div class="slider-handle" style="left: 50%">
-                                                            <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
-                                                            <div class="slider-handle__control__circle" style="backdrop-filter: blur(5px); border: 2px solid rgb(255, 255, 255);"></div>
-                                                            <div class="slider-handle__theme-wrapper">
-                                                                <div class="slider-handle__arrow-wrapper" style="transform: translateX(5px);">
-                                                                    <svg height="15" width="15" style="transform: scale(0.7) rotateZ(180deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
-                                                                        <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
-                                                                    </svg>
+                                                        <div class="image-compare comparison-container comparison-container-first">
+                                                            <img class="not-lazy comparison-top" loading="lazy" alt=""
+                                                                 src="<?= $tab['image'] ?>">
+                                                            <img style="width:auto;" class="not-lazy" loading="lazy"
+                                                                 alt=""
+                                                                 src="<?= $tab['image_after'] ?>">
+                                                            <div class="slider-handle" style="left: 50%">
+                                                                <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
+                                                                <div class="slider-handle__control__circle" style="backdrop-filter: blur(5px); border: 2px solid rgb(255, 255, 255);"></div>
+                                                                <div class="slider-handle__theme-wrapper">
+                                                                    <div class="slider-handle__arrow-wrapper" style="transform: translateX(5px);">
+                                                                        <svg height="15" width="15" style="transform: scale(0.7) rotateZ(180deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
+                                                                            <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
+                                                                        </svg>
+                                                                    </div>
+                                                                    <div class="slider-handle__arrow-wrapper" style="transform: translateX(-5px);">
+                                                                        <svg height="15" width="15" style="transform: scale(0.7); rotateZ(0deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
+                                                                            <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
+                                                                        </svg>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="slider-handle__arrow-wrapper" style="transform: translateX(-5px);">
-                                                                    <svg height="15" width="15" style="transform: scale(0.7); rotateZ(0deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
-                                                                        <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
-                                                                    </svg>
-                                                                </div>
+                                                                <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
                                                             </div>
-                                                            <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
                                                         </div>
-                                                    </div>
                                                     <? endif; ?>
                                                 </div>
                                             </div>
@@ -2345,7 +2374,9 @@ function fields_and_options()
                         ->set_type(array('image'))
                         ->set_value_type('url'),
                     Field::make('text', 'client_position', 'Client position'),
-                    Field::make('text', 'client_name', 'Client Name')
+                    Field::make('text', 'client_name', 'Client Name'),
+                    Field::make('checkbox', 'hide_client_data', 'Hide client info')
+                        ->set_default_value(false)
                 ))
         ))
         ->set_parent('carbon-fields/site-section')
@@ -2370,14 +2401,16 @@ function fields_and_options()
                                                  class="testimonials-block__slide-logo">
                                         <? endif; ?>
                                         <div class="testimonials-block__slide-desc">«<?= $testimonial['desc'] ?>».</div>
-                                        <div class="testimonials-block__slide-client-info">
-                                            <? if (!empty($testimonial['client_avatar'])): ?>
-                                                <img alt="img" class="testimonials-block__slide-client-avatar"
-                                                     src="<?= $testimonial['client_avatar'] ?>">
-                                            <? endif; ?>
-                                            <div class="testimonials-block__slide-client-position"><?= $testimonial['client_position'] ?></div>
-                                            <div class="testimonials-block__slide-client-name"><?= $testimonial['client_name'] ?></div>
-                                        </div>
+                                        <?php if (!$testimonial['hide_client_data']): ?>
+                                            <div class="testimonials-block__slide-client-info">
+                                                <? if (!empty($testimonial['client_avatar'])): ?>
+                                                    <img alt="img" class="testimonials-block__slide-client-avatar"
+                                                         src="<?= $testimonial['client_avatar'] ?>">
+                                                <? endif; ?>
+                                                <div class="testimonials-block__slide-client-position"><?= $testimonial['client_position'] ?></div>
+                                                <div class="testimonials-block__slide-client-name"><?= $testimonial['client_name'] ?></div>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                 <? endforeach; ?>
                             </div>
@@ -2414,7 +2447,9 @@ function fields_and_options()
                     Field::make('image', 'client_avatar', 'Image')->set_type(array('image'))->set_value_type('url'),
                     Field::make('color', 'background_color', 'Background color'),
                     Field::make('text', 'client_position', 'Client position'),
-                    Field::make('text', 'client_name', 'Client Name')
+                    Field::make('text', 'client_name', 'Client Name'),
+                    Field::make('checkbox', 'hide_client_data', 'Hide client info')
+                        ->set_default_value(false)
                 ))
         ))
         ->set_parent('carbon-fields/site-section')
@@ -2456,7 +2491,7 @@ function fields_and_options()
                                                 case 5:
                                                     $star_image = ($rating == 4) ? '4' : (($rating == 4.5) ? '4.5' : '5');
                                                     echo "<div itemprop=\"reviewRating\" itemscope itemtype=\"https://schema.org/Rating\"><img src=\"/public_html/wp-content/themes/orm/img/{$star_image} star.svg\" alt=\"{$rating} stars\"/></div>",
-                                                        "<meta itemprop=\"worstRating\" content = \"1\">  <span itemprop=\"ratingValue\">" . $rating . "</span>   <span itemprop=\"bestRating\">5</span><div class=\"new-testimonials-block__slide-rating-text\">{$rating_text}</div>";
+                                                    "<meta itemprop=\"worstRating\" content = \"1\"><div class=\"new-testimonials-block__slide-rating-text\">{$rating_text}</div>";
                                                     break;
 
                                                 default:
@@ -2474,19 +2509,10 @@ function fields_and_options()
                                         <div class="new-testimonials-block__slide-desc"  itemprop="reviewBody">'
                                             . $testimonial['desc'] .
                                             '</div>
-                                        <div class="new-testimonials-block__slide-client-info">
-										 <div class="new-testimonials-block__slide-client-name" itemprop="author">' . $testimonial['client_name'] . '</div>
-										 <div class="new-testimonials-block__slide-client-position">' . $testimonial['client_position'] . '</div>
-										 <div class="new-testimonials-block__slide-client-images">
-										     <img class="new-testimonials-block__slide-client-avatar" src="' . $testimonial['client_avatar'] . '">
-										 <a href=""></a>
-										     <img  src="' . $testimonial['brand_logo'] . '" class="new-testimonials-block__slide-logo">
-									     </div>
-									     </div>
                                         </div>
 
                                             <p>
-                                                <button class="read-more-button" data-fancybox data-src="#' . $testimonialId . '">Read more <svg xmlns="http://www.w3.org/2000/svg" width="24" height="30" viewBox="0 0 24 30" fill="none">
+                                                <button class="read-more-button" data-fancybox data-src="#' . $testimonialId . '">Подробнее <svg xmlns="http://www.w3.org/2000/svg" width="24" height="30" viewBox="0 0 24 30" fill="none">
                                                     <path d="M7.5 13L11.5 17L15.5 13" stroke="#666666" stroke-width="1.5" stroke-linecap="square"/>
                                                 </svg>
                                                 </button>
@@ -2509,20 +2535,22 @@ function fields_and_options()
                                             }
                                             ?>
                                         </div>
-                                        <div class="new-testimonials-block__slide-client-info">
-                                            <div class="new-testimonials-block__slide-client-name"><?= $testimonial['client_name'] ?></div>
-                                            <div class="new-testimonials-block__slide-client-position"><?= $testimonial['client_position'] ?></div>
-                                            <div class="new-testimonials-block__slide-client-images"><? if (!empty($testimonial['client_avatar'])): ?>
-                                                    <img class="new-testimonials-block__slide-client-avatar"
-                                                         src="<?= $testimonial['client_avatar'] ?>">
-                                                <? endif; ?>
-                                                <a href=""></a>
-                                                <? if (!empty($testimonial['brand_logo'])): ?>
-                                                    <img src="<?= $testimonial['brand_logo'] ?>"
-                                                         class="new-testimonials-block__slide-logo">
-                                                <? endif; ?>
+                                        <?php if (!$testimonial['hide_client_data']): ?>
+                                            <div class="new-testimonials-block__slide-client-info">
+                                                <div class="new-testimonials-block__slide-client-name"><?= $testimonial['client_name'] ?></div>
+                                                <div class="new-testimonials-block__slide-client-position"><?= $testimonial['client_position'] ?></div>
+                                                <div class="new-testimonials-block__slide-client-images"><? if (!empty($testimonial['client_avatar'])): ?>
+                                                        <img class="new-testimonials-block__slide-client-avatar"
+                                                             src="<?= $testimonial['client_avatar'] ?>">
+                                                    <? endif; ?>
+                                                    <a href=""></a>
+                                                    <? if (!empty($testimonial['brand_logo'])): ?>
+                                                        <img src="<?= $testimonial['brand_logo'] ?>"
+                                                             class="new-testimonials-block__slide-logo">
+                                                    <? endif; ?>
+                                                </div>
                                             </div>
-                                        </div>
+                                        <?php endif; ?>
                                     </div>
                                 <? endforeach; ?>
                             </div>
@@ -2826,6 +2854,8 @@ function fields_and_options()
                     $btn_link = $fields['btn_link'];
                     $before_text = $fields['before_text'];
                     $after_text = $fields['after_text'];
+                    $before_up_text = "До";
+                    $after_up_text = "После";
                     ?>
                     <div class="swiper-slide before-after-block">
                         <div class="before-after__columns">
@@ -2938,8 +2968,8 @@ function fields_and_options()
                                         </div>
                                     </div>
                                 <? endif; ?>
-                                <div class="bottom-left"><?= $before_text ?></div>
-                                <div class="bottom-right"><?= $after_text ?></div>
+                                <div class="bottom-left"><?= $before_up_text ?></div>
+                                <div class="bottom-right"><?= $after_up_text ?></div>
                             </div>
                         </div>
                     </div>
@@ -3383,37 +3413,37 @@ function fields_and_options()
                                         <div class="swiper-slide" itemtype="https://schema.org/Product">
                                             <div class="gallery-block__content-wrapper">
                                                 <? if (!empty($image_after) and !empty($image_before)): ?>
-                                                <div class="image-compare comparison-container comparison-container-third">
-                                                    <? if (!empty($image_after)): ?>
-                                                        <? $image_after = ImageResizeWordPress::resizeWidthWebp($image_after, 1450) ?>
-                                                        <img loading="lazy" width="1050" height="700" alt="img"
-                                                             class="gallery-block__img comparison-top not-lazy"
-                                                             src="<?= $image_after ?>">
-                                                    <? endif; ?>
-                                                    <? if (!empty($image_before)): ?>
-                                                        <? $image_before = ImageResizeWordPress::resizeWidthWebp($image_before, 1450) ?>
-                                                        <img loading="lazy" width="1050" height="700" alt="img"
-                                                             class="gallery-block__img not-lazy"
-                                                             src="<?= $image_before ?>">
-                                                    <? endif; ?>
-                                                    <div class="slider-handle" style="left: 50%">
-                                                        <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
-                                                        <div class="slider-handle__control__circle" style="backdrop-filter: blur(5px); border: 2px solid rgb(255, 255, 255);"></div>
-                                                        <div class="slider-handle__theme-wrapper">
-                                                            <div class="slider-handle__arrow-wrapper" style="transform: translateX(5px);">
-                                                                <svg height="15" width="15" style="transform: scale(0.7) rotateZ(180deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
-                                                                    <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
-                                                                </svg>
+                                                    <div class="image-compare comparison-container comparison-container-third">
+                                                        <? if (!empty($image_after)): ?>
+                                                            <? $image_after = ImageResizeWordPress::resizeWidthWebp($image_after, 1450) ?>
+                                                            <img loading="lazy" width="1050" height="700" alt="img"
+                                                                 class="gallery-block__img comparison-top not-lazy"
+                                                                 src="<?= $image_after ?>">
+                                                        <? endif; ?>
+                                                        <? if (!empty($image_before)): ?>
+                                                            <? $image_before = ImageResizeWordPress::resizeWidthWebp($image_before, 1450) ?>
+                                                            <img loading="lazy" width="1050" height="700" alt="img"
+                                                                 class="gallery-block__img not-lazy"
+                                                                 src="<?= $image_before ?>">
+                                                        <? endif; ?>
+                                                        <div class="slider-handle" style="left: 50%">
+                                                            <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
+                                                            <div class="slider-handle__control__circle" style="backdrop-filter: blur(5px); border: 2px solid rgb(255, 255, 255);"></div>
+                                                            <div class="slider-handle__theme-wrapper">
+                                                                <div class="slider-handle__arrow-wrapper" style="transform: translateX(5px);">
+                                                                    <svg height="15" width="15" style="transform: scale(0.7) rotateZ(180deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
+                                                                        <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
+                                                                    </svg>
+                                                                </div>
+                                                                <div class="slider-handle__arrow-wrapper" style="transform: translateX(-5px);">
+                                                                    <svg height="15" width="15" style="transform: scale(0.7); rotateZ(0deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
+                                                                        <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
+                                                                    </svg>
+                                                                </div>
                                                             </div>
-                                                            <div class="slider-handle__arrow-wrapper" style="transform: translateX(-5px);">
-                                                                <svg height="15" width="15" style="transform: scale(0.7); rotateZ(0deg); height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 15 15">
-                                                                    <path fill="transparent" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3" d="M4.5 1.9L10 7.65l-5.5 5.4"></path>
-                                                                </svg>
-                                                            </div>
+                                                            <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
                                                         </div>
-                                                        <div class="slider-handle__control-line" style="width: 2px; background: rgb(255, 255, 255);"></div>
                                                     </div>
-                                                </div>
                                                 <? endif; ?>
                                             </div>
 

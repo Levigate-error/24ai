@@ -80,6 +80,8 @@ line-height: 30px; /* 125% */
    .before-after__content-wrapper {
        height: auto;
        width: auto;
+       margin-right: auto;
+       margin-left: auto;
     } 
    
    .before-after-content__btn {
@@ -87,13 +89,17 @@ line-height: 30px; /* 125% */
    }
    
    .before-after__column-desc {
-        font-size: 18px;
-        font-weight: 500;
-        line-height: 24px;
-        letter-spacing: 0px;
-        text-align: center;
+       font-size: 18px;
+       font-weight: 500;
+       line-height: 24px;
+       letter-spacing: 0px;
+       text-align: center;
 
    }
-    
 }
 
+@media screen and (max-width: 600px) {
+    .before-after__content-wrapper {
+        width: 100%;
+    }
+}
