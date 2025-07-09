@@ -206,10 +206,115 @@ add_filter('comment_form_default_fields', function($fields) {
 add_filter('pre_comment_approved', function($approved, $commentdata) {
     return 1; // 1 = опубликован
 }, 10, 2);
-
 add_filter('home_url', function($url, $path, $orig_scheme, $blog_id) {
-    return 'https://24ai.tech/ru/' . $path;
+    return 'https://stage.24ai.tech/ru/' . $path;
 }, 10, 4);
+//add_filter('wp_get_attachment_url', 'debug_custom_lang_image_url_rewrite', 10, 2);
+//
+//function debug_custom_lang_image_url_rewrite($url, $post_id) {
+//    $log_path = ABSPATH . '/wp-content/debug.log';
+//
+//    $current_url = $_SERVER['REQUEST_URI'];
+//    $log = [
+//        'ORIGINAL_URL' => $url,
+//        'CURRENT_URI' => $current_url,
+//    ];
+//    file_put_contents($log_path, print_r($log, true), FILE_APPEND);
+//    if (strpos($current_url, '/ru/') === 0) {
+//        $new_url = str_replace('/en/wp-content/uploads/', '/ru/wp-content/uploads/', $url);
+//        file_put_contents($log_path, "REWRITTEN_URL: $new_url\n", FILE_APPEND);
+//        return $new_url;
+//    }
+//
+//    return $url;
+//}
+add_action('template_redirect', function () {
+    ob_start(function ($buffer) {
+        $current_uri = $_SERVER['REQUEST_URI'] ?? '';
+
+        // Разбиваем на части: скрипты и остальное, чтобы не менять скрипты
+        $parts = preg_split('#(<script\b[^>]*>.*?</script>)#is', $buffer, -1, PREG_SPLIT_DELIM_CAPTURE);
+
+        foreach ($parts as &$part) {
+            // Если это не скрипт — применяем замены
+            if (!preg_match('#^<script\b#i', $part)) {
+                // 1. Fix double slashes (except after "https://")
+                $part = preg_replace('#(?<!:)//+#', '/', $part);
+
+                // 2. Rewrite image URLs from /en/ to /ru/
+                if (strpos($current_uri, '/ru/') === 0) {
+                    $part = str_replace('/en/wp-content/uploads/', '/ru/wp-content/uploads/', $part);
+                }
+            }
+        }
+        unset($part);
+
+        // Собираем обратно буфер
+        return implode('', $parts);
+    });
+});
+
+function rename_files_and_update_links() {
+    global $wpdb;
+
+    $upload_dir = wp_upload_dir();
+    $base_dir = $upload_dir['basedir']; // путь к uploads
+    $base_url = $upload_dir['baseurl']; // https://site/wp-content/uploads
+
+    $rii = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($base_dir));
+
+    foreach ($rii as $file) {
+        if ($file->isDir()) continue;
+
+        $old_name = $file->getFilename();
+        $old_path = $file->getPathname();
+        $old_relative_path = str_replace($base_dir, '', $old_path);
+        $old_url = $base_url . str_replace(DIRECTORY_SEPARATOR, '/', $old_relative_path);
+
+        // Создаём "чистое" имя файла
+        $clean_name = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $old_name);
+        $clean_name = preg_replace('/[^A-Za-z0-9\-\._]/', '', $clean_name);
+
+        if ($clean_name !== $old_name && !empty($clean_name)) {
+            $new_path = $file->getPath() . DIRECTORY_SEPARATOR . $clean_name;
+            $new_relative_path = str_replace($base_dir, '', $new_path);
+            $new_url = $base_url . str_replace(DIRECTORY_SEPARATOR, '/', $new_relative_path);
+
+            // Проверяем, нет ли уже файла с новым именем
+            if (!file_exists($new_path)) {
+                // Переименовываем файл
+                if (rename($old_path, $new_path)) {
+                    echo "Renamed file: $old_name -> $clean_name<br>";
+
+                    // Обновляем ссылки в базе данных
+                    $wpdb->query(
+                        $wpdb->prepare(
+                            "UPDATE {$wpdb->posts} SET post_content = REPLACE(post_content, %s, %s)",
+                            $old_url,
+                            $new_url
+                        )
+                    );
+                    $wpdb->query(
+                        $wpdb->prepare(
+                            "UPDATE {$wpdb->postmeta} SET meta_value = REPLACE(meta_value, %s, %s)",
+                            $old_url,
+                            $new_url
+                        )
+                    );
+
+                    echo "Updated links: $old_url -> $new_url<br>";
+                } else {
+                    echo "Failed to rename file: $old_name<br>";
+                }
+            } else {
+                echo "File with new name already exists: $clean_name<br>";
+            }
+        }
+    }
+}
+
+// Вызов функции — разово
+//rename_files_and_update_links();
 
 remove_action('comment_form', 'comment_form_cookie_consent');
 
@@ -278,8 +383,8 @@ function orm_scripts() {
 //	wp_enqueue_style('image-compare-css', 'https://unpkg.com/image-compare-viewer@1.5.0/dist/image-compare-viewer.min.css', array(), _S_VERSION);
 //	wp_enqueue_script( 'image-compare-js', 'https://unpkg.com/image-compare-viewer@1.5.0/dist/image-compare-viewer.min.js', array(), _S_VERSION, true );
 
-    wp_enqueue_style('image-compare-css',get_template_directory_uri() . '/css/image-compare-viewer.min.css', array(), _S_VERSION);
-    wp_enqueue_script( 'image-compare-js', 'https://unpkg.com/image-compare-viewer@1.6.2/dist/image-compare-viewer.min.js', array(), _S_VERSION, true );
+//    wp_enqueue_style('image-compare-css',get_template_directory_uri() . '/css/image-compare-viewer.min.css', array(), _S_VERSION);
+//    wp_enqueue_script( 'image-compare-js', 'https://unpkg.com/image-compare-viewer@1.6.2/dist/image-compare-viewer.min.js', array(), _S_VERSION, true );
 
 
 

@@ -4,41 +4,88 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f3731a4b-111c-4203-9539-b83e121128b9" name="Changes" comment="" />
+    <list default="true" id="f3731a4b-111c-4203-9539-b83e121128b9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carbon-fields/theme-options.php" beforeDir="false" afterPath="$PROJECT_DIR$/carbon-fields/theme-options.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/components/new-components/before-after.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/components/new-components/before-after.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/home_page.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/home_page.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/home_page.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/home_page.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/media_page.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/media_page.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/media_page.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/media_page.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/main.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.min.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="prod" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\tools\php83\php.exe" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="2tBITu36y9uwEoCWkmEmQkDEuH3" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/Projects/back/smet-landing&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
+    "WebServerToolWindowPanel.toolwindow.show.date": "false",
+    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
+    "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
+    "git-widget-placeholder": "stage",
+    "ignore_missing_gitignore": "true",
+    "last_opened_file_path": "E:/Projects/back/24ai-landing",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
-}</component>
+}]]></component>
+  <component name="SQLScriptSettings">
+    <option name="matrix">
+      <map>
+        <entry key="MYSQL.CreateComplete" value="CurrentSequenceValue=1" />
+      </map>
+    </option>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -67,10 +114,62 @@
       <workItem from="1741334285158" duration="615000" />
       <workItem from="1741529329879" duration="1680000" />
       <workItem from="1741545327358" duration="13954000" />
+      <workItem from="1741942544402" duration="6846000" />
+      <workItem from="1743338841799" duration="473000" />
+      <workItem from="1743348221121" duration="2221000" />
+      <workItem from="1743409500846" duration="2662000" />
+      <workItem from="1743428881974" duration="376000" />
+      <workItem from="1743429837319" duration="655000" />
+      <workItem from="1743861071164" duration="3032000" />
+      <workItem from="1743932424181" duration="21010000" />
+      <workItem from="1744012360517" duration="12306000" />
+      <workItem from="1745259791068" duration="3461000" />
+      <workItem from="1745310636463" duration="1727000" />
+      <workItem from="1745329997658" duration="836000" />
+      <workItem from="1745400524654" duration="765000" />
+      <workItem from="1745491882778" duration="2178000" />
+      <workItem from="1745522003973" duration="5157000" />
+      <workItem from="1746887274386" duration="131000" />
+      <workItem from="1746889917928" duration="329000" />
+      <workItem from="1747035695028" duration="2927000" />
+      <workItem from="1747211110815" duration="150000" />
+      <workItem from="1747692840622" duration="5376000" />
+      <workItem from="1747989547426" duration="1895000" />
+      <workItem from="1748248300624" duration="935000" />
+      <workItem from="1748461859277" duration="7193000" />
+      <workItem from="1748611547023" duration="1141000" />
+      <workItem from="1748818496483" duration="3708000" />
+      <workItem from="1748857181642" duration="1035000" />
+      <workItem from="1749556134348" duration="5437000" />
+      <workItem from="1749574946802" duration="3149000" />
+      <workItem from="1749595489683" duration="4216000" />
+      <workItem from="1749600408494" duration="4000" />
+      <workItem from="1750326099238" duration="2330000" />
+      <workItem from="1750411043110" duration="3055000" />
+      <workItem from="1750927534112" duration="22000" />
+      <workItem from="1750927584982" duration="3938000" />
+      <workItem from="1751444875543" duration="2647000" />
+      <workItem from="1751462546110" duration="1752000" />
+      <workItem from="1751465362947" duration="692000" />
+      <workItem from="1751541707397" duration="5269000" />
+      <workItem from="1751906731618" duration="3113000" />
+      <workItem from="1751963072117" duration="2026000" />
+      <workItem from="1752056619709" duration="5008000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/carbon-fields/theme-options.php</url>
+          <line>275</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
